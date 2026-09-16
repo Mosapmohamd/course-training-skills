@@ -98,14 +98,8 @@ Schema changes must be documented here and in the script in the same commit.
 
 ## Research policy
 
-Research (web lookups / current-info retrieval) is **off by default**. Turn it
-on only when: the user asks for the latest information; the topic changes
-frequently (fast-moving libraries/frameworks, current events); the course
-explicitly needs external references or sources; the user requests citations.
-When on: prefer official docs and primary sources, record source + date in the
-relevant artifact, and clearly separate "current, dated" facts from static
-conceptual knowledge. Do not browse for topics that are stable, foundational
-knowledge (e.g. what a for-loop is).
+See `references/instructional-design/research-policy.md` (off by default;
+turned on only for current/fast-changing/explicitly-sourced topics).
 
 ## Output directory structure
 
