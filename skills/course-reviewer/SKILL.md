@@ -35,7 +35,9 @@ sessions named in a scoped adaptation review).
 ## References
 `references/quality/quality-standards.md` (the checklist),
 `references/instructional-design/learning-progression.md`,
-`references/instructional-design/course-architecture.md`.
+`references/instructional-design/course-architecture.md`,
+`references/institutional-requirements/course-bag-program.md` (the
+Institutional requirements check).
 
 ## Templates
 `templates/course-review-template.md`
@@ -46,7 +48,7 @@ The user (final gate before the package is considered done);
 
 ## Procedure
 
-1. Run each of the 13 checks in `references/quality/quality-standards.md`
+1. Run each of the 14 checks in `references/quality/quality-standards.md`
    against the current artifact set.
 2. For each failure, classify: **auto-fixable** (unambiguous — retiming an
    agenda, linking an orphaned objective, adding a missing required field) vs.
@@ -57,9 +59,17 @@ The user (final gate before the package is considered done);
    (activity, exercise, notebook, slides, assessment) for concepts used but
    not in that set (or an earlier session's set). This is the check that
    catches the `README.md` §17 XGBoost example.
-5. Write `review/course-review.md` with the full checklist table, issues
+5. For Institutional requirements specifically: confirm `schedule.total_hours`
+   meets the 6-hour minimum in
+   `references/institutional-requirements/course-bag-program.md` §1 (FAIL,
+   needs-decision, if not — a course this short shouldn't have reached
+   review without the Step 1 flag already having been raised by
+   `course-designer`), and if it's under the 20-hour certificate threshold,
+   confirm the course plan or course-bag draft notes the certificate rule
+   rather than silently omitting it.
+6. Write `review/course-review.md` with the full checklist table, issues
    list (each tagged auto-fixed or needs-decision), and an overall PASS/FAIL.
-6. If FAIL with unresolved needs-decision items, clearly enumerate them for
+7. If FAIL with unresolved needs-decision items, clearly enumerate them for
    the instructor rather than declaring the course done.
 
 ## Validation

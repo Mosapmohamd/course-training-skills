@@ -8,8 +8,11 @@ its output ready for approval.
 `Scope check, Objective check, Coverage check, Sequencing check, Timing
 check, Activity purpose check, Practical alignment check, Assessment
 alignment check, Difficulty check, Slide alignment check, Notebook alignment
-check, Instructor guide alignment check, Cross-artifact consistency check`
-(`README.md` §37).
+check, Instructor guide alignment check, Cross-artifact consistency check,
+Institutional requirements check`
+(`README.md` §37, extended with the institutional requirements check for
+programs like "حقيبة الكورسات" — see
+`references/institutional-requirements/course-bag-program.md`).
 
 ## What each check verifies
 
@@ -28,6 +31,7 @@ check, Instructor guide alignment check, Cross-artifact consistency check`
 | Notebook alignment | Notebook matches the session; no unexplained concepts |
 | Instructor guide alignment | Guide references the session's real agenda/activities, not generic advice |
 | Cross-artifact consistency | No contradictions between artifacts for the same session (the XGBoost example, `README.md` §17) |
+| Institutional requirements | `schedule.total_hours` meets the program's minimum (6h) and, if under the certificate threshold (20h), the certificate rule is noted rather than silently omitted — `references/institutional-requirements/course-bag-program.md` |
 
 ## Skill contract shape
 
