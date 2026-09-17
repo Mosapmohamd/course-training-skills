@@ -39,6 +39,8 @@ None — this is the entry point.
 - `references/instructional-design/course-architecture.md` (state/manifest schema)
 - `references/adaptation/adaptation-rules.md`
 - `references/instructional-design/course-architecture.md#research-policy`
+- `references/institutional-requirements/course-bag-program.md` (minimum
+  duration, certificate threshold, course-bag submission form)
 
 ## Templates
 Indirectly all of them, via the skills it invokes.
@@ -56,6 +58,19 @@ question ONLY when a missing/ambiguous value would materially change the
 course design (e.g. session count/duration arithmetic doesn't resolve
 cleanly, or level is genuinely unclear from context) — not for anything
 inferable.
+
+**Institutional requirements check (same step, not deferred):** as soon as
+`total_hours` is known, check it against
+`references/institutional-requirements/course-bag-program.md`:
+- **Under 6 hours:** flag immediately — this course isn't eligible for the
+  course-bag program as planned; ask whether to extend it or proceed
+  knowing it won't be submittable.
+- **6–19 hours:** flag the certificate rule explicitly and present the
+  three options from `course-bag-program.md` §2 (add a session, extend
+  session length, proceed without a certificate) — do this now, at
+  requirements time, the same way a Course Outcomes or Prerequisites gap
+  would be surfaced, not silently and not saved for the final review.
+- **20+ hours:** no flag needed.
 
 ### 2. Determine mode
 Default: **interactive**. If the user says `--full` or equivalent ("just
@@ -104,8 +119,27 @@ Once all artifacts are `approved`/generated, invoke `course-reviewer` on the
 whole course. Report the result to the user; if it fails, fix what's
 fixable and re-run, or surface what needs an instructor decision.
 
+### 8. Offer the course-bag submission draft
+After a passing final review, offer (don't auto-generate unasked) to
+produce the course-bag submission package per
+`references/institutional-requirements/course-bag-program.md` §3–4:
+- `courses/<course-id>/course-bag/submission-draft.md`
+  (`templates/course-bag-submission-template.md`) — the 13 fields,
+  pre-filled from `course-plan.md`/the manifest where derivable, with
+  *(instructor input needed)* markers on the fields that aren't (Email,
+  Department, promotional image description).
+- `courses/<course-id>/course-bag/timetable.xlsx`
+  (`templates/course-bag-timetable-template.md`'s column spec) — a real
+  spreadsheet, one row per session.
+
+If the course is under 20 hours, repeat the certificate note from Step 1 in
+the draft rather than assuming the instructor still remembers it from
+earlier in the conversation.
+
 ## Validation
 - [ ] Manifest passes `scripts/validate_manifest.py`
 - [ ] No skill was asked to produce content outside its declared responsibility
 - [ ] Every approval checkpoint (interactive mode) was honored, not skipped
 - [ ] `status` accurately reflects what's actually been generated
+- [ ] The institutional requirements check (Step 1) ran before the course
+      was designed, not discovered only at the final review

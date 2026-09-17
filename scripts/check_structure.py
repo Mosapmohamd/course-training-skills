@@ -31,6 +31,7 @@ REQUIRED_REFERENCE_FILES = [
     "instructor/instructor-guidance.md",
     "adaptation/adaptation-rules.md",
     "quality/quality-standards.md",
+    "institutional-requirements/course-bag-program.md",
 ]
 
 REQUIRED_TEMPLATES = [
@@ -38,6 +39,7 @@ REQUIRED_TEMPLATES = [
     "activity-template.md", "exercise-template.md", "notebook-template.md",
     "slide-template.md", "assessment-template.md",
     "instructor-guide-template.md", "course-review-template.md",
+    "course-bag-submission-template.md", "course-bag-timetable-template.md",
 ]
 
 REQUIRED_CONFIG = [
