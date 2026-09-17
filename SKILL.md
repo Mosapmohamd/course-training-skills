@@ -1,6 +1,6 @@
 ---
 name: course-training-skills
-description: Entry point for turning course requirements (name, audience, level, duration, sessions, session length) into a complete instructor-ready training package — course plan, timed session agendas, activities, practical exercises, notebooks where useful, slide specs and editable PowerPoint, assessments, instructor guide, and a quality review. Use when the user wants to design, build, adapt, or review a training course or curriculum.
+description: Designs complete training courses (outline, agendas, activities, exercises, notebooks, slides, assessments, instructor guide) from requirements. Use for building or reviewing a training course.
 ---
 
 # Course Training Skills
