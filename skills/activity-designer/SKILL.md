@@ -58,10 +58,20 @@ block duration(s) exactly.
 5. Check `delivery.mode`/`internet`/`hardware` — an activity requiring
    materials or connectivity not declared available is invalid; redesign for
    the actual constraints.
+6. When `delivery.mode` is `offline` (in person), also design the embedded
+   micro-activities for each Explanation block of 20+ minutes, following
+   `activity-patterns.md#activity-density-for-in-person-sessions` and the
+   pacing in `config/teaching-preferences.md`. Use physical-room mechanics
+   (standing, paper, sticky notes, printed cards), not online tools.
+7. Number all activities of the session consecutively (Activity 1, 2, …) in
+   the order they run, and list every printed/physical material the
+   instructor must prepare.
 
 ## Validation
 - [ ] Every activity traces to a stated session objective
 - [ ] Duration matches the agenda block it fills
 - [ ] Class size / delivery mode fit is respected
+- [ ] In-person sessions: every Explanation block of 20+ min has an embedded
+      micro-activity, and no two consecutive activities share a mechanic
 - [ ] No two consecutive sessions use the identical activity pattern without
       reason (vary format — check against the prior session's file)

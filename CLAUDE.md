@@ -73,4 +73,6 @@ Stage 2 of `slide-designer` (turning a slide specification into an actual
 editable `.pptx`) depends on a presentation/design capability being available
 in the runtime (e.g. a document/slide-authoring tool). If that capability is
 not available, `slide-designer` must stop after Stage 1 (the specification)
-and say so — it must not fabricate a fake "pptx".
+and say so — it must not fabricate a fake "pptx". A native editable deck
+artifact (e.g. Claude Slides) counts as a valid Stage 2 target
+(`references/slides/slide-patterns.md#stage-2-targets`).
