@@ -25,14 +25,16 @@ after activities/exercise, since slides may reference them) completes.
 ## Inputs
 This session's Topics, Key Concepts, Examples (`session-designer`);
 Activities/Exercise names for Instructions/Exercise-type slides;
+`config/instructor-profile.md` (Trainer Intro, Contact, Closing slides);
 `config/presentation-style.md` (Stage 2 only).
 
 ## Outputs
 Stage 1: `slides/session-NN-slides.md`, one entry per
 `templates/slide-template.md`. Stage 2 (capability permitting):
-`slides/session-NN-slides.pptx` — real, editable text/shapes/diagrams/
-tables/charts/code blocks where the tool supports them; images may remain
-images.
+`slides/session-NN-slides.pptx`, or a native editable slide-deck artifact
+when the runtime offers one (`slide-patterns.md#stage-2-targets`) — real,
+editable text/shapes/diagrams/tables/charts/code blocks where the tool
+supports them; images may remain images.
 
 ## Dependencies
 `session-designer` (required); `activity-designer`, `practical-work`
@@ -63,6 +65,16 @@ instructional content).
    slides — each slide earns its place in the teaching sequence.
 5. Include at least one Recap slide at session end, and an
    Instructions/Exercise slide immediately before any Practice block.
+6. Wrap the deck in the frame from `slide-patterns.md#deck-frame`: Title →
+   Trainer Intro → Agenda → Objectives → … → Recap → Q&A → Contact
+   (penultimate) → Closing "Thank You" (last). Fill the Trainer Intro and
+   Contact from `config/instructor-profile.md`; a missing value becomes a
+   bracketed placeholder listed in the hand-off, never an invented one.
+7. Give every activity in `activities/session-NN-activities.md` (embedded
+   micro-activities included) its own Instructions slide where it runs, per
+   `slide-patterns.md#activity-slides`.
+8. If the course language is right-to-left, apply
+   `slide-patterns.md#right-to-left-arabic-decks` in Stage 2.
 
 ### Stage 2 — presentation generation
 1. Check whether a presentation/design capability is available in this
@@ -76,10 +88,14 @@ instructional content).
    standing in for the whole slide. Photographic/illustrative images may
    remain images.
 4. Validate the resulting file is a structurally valid `.pptx`
-   (`scripts/validate_course.py`) before calling it done.
+   (`scripts/validate_course.py`) before calling it done. For a native deck
+   artifact, record its link in the manifest's `slides:` entry instead.
 
 ## Validation
 - [ ] Every slide's content traces to this session's actual Topics/Explanation
 - [ ] No slide is a verbatim copy of the outline or instructor guide
+- [ ] Deck frame present: Trainer Intro second, Contact penultimate,
+      Closing "Thank You" last
+- [ ] Every activity in the session's activities file has its own slide
 - [ ] Stage 2 either produced a real editable `.pptx`, verified valid, or was
       explicitly skipped with the limitation stated — never a fabricated file

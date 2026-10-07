@@ -1,5 +1,5 @@
 instructor:
-  name: ""   # fork and fill in, or leave blank for a generic package
+  name: "Mosap Abdel-Ghany"   # full identity + contact channels: config/instructor-profile.md
 
 defaults:
   research: false

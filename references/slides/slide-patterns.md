@@ -23,6 +23,54 @@ specifies fonts, colors, or layout pixel positions — that's Stage 2.
 | Instructions | What to do for an upcoming activity/exercise |
 | Exercise | The exercise prompt itself, projected during practice time |
 | Recap | End-of-section or end-of-session summary |
+| Section divider | Opening each major agenda part: number, title, duration |
+| Trainer Intro | Who is teaching — identity and credibility, right after the title slide |
+| Contact | How learners reach the instructor after the session |
+| Closing | The final "Thank You" slide |
+
+## Deck frame
+
+Every session deck is wrapped in the same frame, whatever the topic:
+
+1. **Title** — course/session name, format and duration, instructor name, date.
+2. **Trainer Intro** — exactly three short items, one per stacked full-width
+   card, large text, no paragraphs: (1) name, (2) professional title,
+   (3) instructor title. Values come from `config/instructor-profile.md`.
+   Keep it professional and minimal — the instructor tells the story out loud
+   (speaker notes), the slide only anchors it.
+3. **Agenda**, then **Objectives** — then the teaching body.
+4. … **Recap**, then **Q&A**.
+5. **Contact** — always the penultimate slide: every channel listed under
+   "Contact channels" in `config/instructor-profile.md` (LinkedIn first,
+   then WhatsApp, email, portfolio), plus one call-to-action line tied to the
+   session ("send me a connection request using today's structure").
+6. **Closing** — always the last slide: a visually distinctive "Thank You"
+   (the most designed slide in the deck), a thanks line in the course
+   language, instructor name and title.
+
+A contact value missing from the profile appears as a bracketed placeholder
+(`[+20 …]`) and is listed in the hand-off message — never invented.
+
+## Activity slides
+
+Every activity in `activities/session-NN-activities.md` — including the
+short embedded ones — gets its own Instructions slide placed where it runs:
+eyebrow `Activity N · duration · grouping`, a title, 3 numbered steps, and
+the expected outcome as one line. Number activities consecutively across the
+session. Materials, timing tips and the debrief question go in Speaker Notes,
+not on the slide.
+
+## Right-to-left (Arabic) decks
+
+- Align text right and lay rows out right-to-left (reverse flex rows; in
+  grids, place the first item in the right-hand cell).
+- Arabic text that contains English terms renders in the wrong word order
+  when the paragraph's base direction is left-to-right. If the tool has no
+  `dir`/`direction` support, wrap each Arabic paragraph in U+202B (RLE) …
+  U+202C (PDF) so it renders right-to-left.
+- English-only lines (code, sample headlines, sample messages) stay
+  left-to-right and unwrapped.
+- Arrows in RTL flows point left (`←`) for "next".
 
 ## Per-slide required fields
 
@@ -46,6 +94,15 @@ Notes, Interaction`. See `templates/slide-template.md`.
   the slide is the visual anchor, the notes are what's *said*.
 - Do not simply restate the course outline as slide titles — each slide earns
   its place by doing something (teach, show, ask, transition).
+
+## Stage 2 targets
+
+Any real, editable presentation format counts as Stage 2 output: a `.pptx`
+file, or a native editable slide-deck artifact when the runtime offers one
+(e.g. a Claude Slides artifact, which also exports to `.pptx`/PDF). Prefer
+the native deck when available and the user hasn't asked for a file format;
+record which target was used (file path or deck link) in the manifest's
+`slides:` list entry for the session.
 
 ## Stage 2 handoff contract
 

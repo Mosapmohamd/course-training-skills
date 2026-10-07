@@ -76,6 +76,10 @@ Objectives as their primary input boundary — they must not exceed it.
    requirement.
 8. **Reference, don't write**, Activities/Exercise/Assessment/Homework by
    name — the owning skill fills in content afterward and links back here.
+9. **In-person sessions** (`delivery.mode: offline`): label each Explanation
+   block of 20+ minutes with the micro-activity it contains
+   ("Explanation — X + activity: Y"); its minutes stay inside that block
+   (`references/activities/activity-patterns.md#activity-density-for-in-person-sessions`).
 
 ## Validation
 - [ ] Agenda minutes sum exactly to session duration (`scripts/validate_course.py`
