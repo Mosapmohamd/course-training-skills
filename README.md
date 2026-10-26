@@ -47,7 +47,7 @@ courses/machine-learning-beginners/
 ```
 
 **See a real example:** [`courses/machine-learning-beginners/`](courses/machine-learning-beginners/).
-Session 1 is fully generated; Sessions 2–6 are at outline and agenda level
+Session 1 is fully generated, including an editable 19-slide deck ([`session-01-slides.pptx`](courses/machine-learning-beginners/slides/session-01-slides.pptx)); Sessions 2–6 are at outline and agenda level
 ([details](examples/machine-learning/README.md)).
 
 ### How it works

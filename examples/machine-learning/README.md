@@ -29,9 +29,11 @@ output structure). This file is the pointer/README for the example.
 - `courses/machine-learning-beginners/notebooks/session-01-student.ipynb`
   and `session-01-instructor.ipynb` — real, valid `nbformat` 4 notebooks
 - `courses/machine-learning-beginners/slides/session-01-slides.md` — Stage 1
-  slide specification (Stage 2 `.pptx` not generated — no presentation/
-  design capability was available when this example was built; see
-  `courses/machine-learning-beginners/review/course-review.md`)
+  slide specification, wrapped in the deck frame
+- `courses/machine-learning-beginners/slides/session-01-slides.pptx` — Stage 2:
+  a real, editable 19-slide deck built from that spec and styled by
+  `config/presentation-style.md`. Trainer and contact slides show bracketed
+  placeholders until `config/instructor-profile.md` is filled in.
 - `courses/machine-learning-beginners/assessments/session-01-assessment.md`
   and `final-assessment.md`
 - `courses/machine-learning-beginners/instructor-guide/session-01-guide.md`

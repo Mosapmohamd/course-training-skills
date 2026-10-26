@@ -18,7 +18,7 @@ artifact set + Sessions 2–6 outline-level detail.
 | Practical alignment | PASS (Session 1) | Session 1's exercise uses only prerequisite knowledge; prerequisites for Sessions 2–6's planned exercises are consistent with prior sessions' Topics |
 | Assessment alignment | PASS | Every assessment item (Session 1 + final) maps to a stated objective; no item tests an untaught concept (reinforcement learning, introduced definitionally in S1, is correctly never assessed) |
 | Difficulty | PASS | Content stays at Beginner level throughout (no formula derivation for decision trees/k-NN, precision/recall introduced via scenario before formula) |
-| Slide alignment | PASS (Session 1) | Session 1's slide spec traces to its actual Topics; no outline-copying detected. Stage 2 (.pptx) not generated — see Known Limitations |
+| Slide alignment | PASS (Session 1) | Session 1's slide spec traces to its actual Topics; no outline-copying detected. Spec now includes the deck frame (trainer intro, agenda, objectives, Q&A, contact, closing). Stage 2: `slides/session-01-slides.pptx`, 19 editable slides built from the spec only, styled per `config/presentation-style.md`; trainer/contact values show as bracketed placeholders because the shipped profile is unfilled |
 | Notebook alignment | PASS (Session 1) | Both notebooks valid `nbformat` 4 JSON (verified via `scripts/validate_course.py`); student notebook contains no Solutions section; no concept used beyond what Session 1 teaches |
 | Instructor guide alignment | PASS (Session 1) | Fully specific to Session 1's real agenda blocks/activities/exercise, not generic |
 | Cross-artifact consistency | PASS | No contradictions found (e.g. no session teaches X while a later artifact assumes Y not taught — the pattern in `docs/specification.md` §17's XGBoost example does not occur here) |
@@ -36,15 +36,12 @@ artifact set + Sessions 2–6 outline-level detail.
    but not yet generated as standalone files. *Needs instructor/build
    decision*: not auto-fixable — this is additional generation work, not a
    quality defect in what exists. Flagged, not silently completed.
-3. **Slide Stage 2 (.pptx)** — no presentation/design capability was
-   available when this example was built, so only Stage 1 (the slide
-   specification) was produced for Session 1, per
-   `skills/slide-designer/SKILL.md`'s explicit rule against fabricating a
-   fake `.pptx`. *Needs instructor/build decision*: run Stage 2 in an
-   environment with that capability when ready.
+3. **Slide Stage 2 (.pptx)** — resolved for Session 1:
+   `slides/session-01-slides.pptx` is a real, editable deck built from the
+   Stage 1 spec. Sessions 2–6 have no slide spec or deck yet (part of item 2).
 
 ## Overall
-**PASS for everything actually generated**, with two explicitly flagged
-scope gaps (items 2 and 3 above) rather than false completion claims. The
+**PASS for everything actually generated**, with one explicitly flagged
+scope gap (item 2 above) rather than false completion claims. The
 course structure, sequencing, timing, and Session 1's complete artifact set
 all pass every check that applies to them.
