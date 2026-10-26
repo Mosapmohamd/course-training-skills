@@ -1,10 +1,19 @@
 name: release
 
-# Push a tag like v0.2.0 to publish a GitHub Release with the
-# claude.ai upload zip attached.
+# Publishes a GitHub Release with the claude.ai upload zip attached.
+# Two ways to run it:
+#   - push a tag like v0.2.0
+#   - Actions tab → "release" → "Run workflow" (creates the tag from
+#     the version in .claude-plugin/plugin.json unless you type one)
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Tag to create, e.g. v0.2.0 (leave empty to use plugin.json's version)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -16,14 +25,29 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Decide tag
+        id: tag
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            TAG="${GITHUB_REF_NAME}"
+          elif [ -n "${{ inputs.version }}" ]; then
+            TAG="${{ inputs.version }}"
+          else
+            TAG="v$(python3 -c 'import json;print(json.load(open(".claude-plugin/plugin.json"))["version"])')"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Releasing $TAG"
+
       - name: Build claude.ai skill package
         run: bash scripts/build_claude_ai_skill_package.sh
 
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.tag.outputs.tag }}
         run: |
-          gh release create "$GITHUB_REF_NAME" \
+          gh release create "$TAG" \
             dist/course-training-skills-CLAUDE-SKILL-UPLOAD.zip \
-            --title "$GITHUB_REF_NAME" \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
             --generate-notes
