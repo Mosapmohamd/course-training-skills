@@ -58,8 +58,10 @@ The user (final gate before the package is considered done);
    set from Topics/Explanation, then check every downstream artifact
    (activity, exercise, notebook, slides, assessment) for concepts used but
    not in that set (or an earlier session's set). This is the check that
-   catches the `README.md` §17 XGBoost example.
-5. For Institutional requirements specifically: confirm `schedule.total_hours`
+   catches the `docs/specification.md` §17 XGBoost example.
+5. For Institutional requirements specifically (only when
+   `institutional_requirements.course_bag_program: true` in
+   `config/defaults.yaml`; otherwise mark the check N/A): confirm `schedule.total_hours`
    meets the 6-hour minimum in
    `references/institutional-requirements/course-bag-program.md` §1 (FAIL,
    needs-decision, if not — a course this short shouldn't have reached

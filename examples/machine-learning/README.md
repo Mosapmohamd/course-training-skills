@@ -1,7 +1,7 @@
 # Example: Machine Learning (Beginner, 12h, 6×2h)
 
 This is the repository's one complete, end-to-end example
-(`README.md` §33), demonstrating the full toolkit on the canonical case:
+(`docs/specification.md` §33), demonstrating the full toolkit on the canonical case:
 
 ```text
 Course: Machine Learning

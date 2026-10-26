@@ -1,6 +1,6 @@
 """
 Tests for scripts/validate_manifest.py — manifest schema and timing
-arithmetic validation (README.md §35: "Manifest validation", "Duration
+arithmetic validation (docs/specification.md §35: "Manifest validation", "Duration
 calculation", "Required fields").
 """
 import copy

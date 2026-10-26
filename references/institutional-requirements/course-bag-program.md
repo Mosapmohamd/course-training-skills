@@ -8,6 +8,21 @@ This file exists so courses built with this plugin automatically satisfy
 one specific institution's submission rules, without the instructor having
 to remember or re-check them by hand every time.
 
+> **Opt-in.** These rules apply only when
+> `institutional_requirements.course_bag_program: true` in
+> `config/defaults.yaml`. They are off by default, because most instructors
+> don't submit to this program.
+>
+> **Last checked by the maintainer: October 2026.** Institutions change
+> their rules. Always confirm against the program's current submission form
+> before submitting. If the form and this file disagree, the form wins, and
+> please open an issue so this file can be updated.
+>
+> **Adding another institution:** copy this file to
+> `references/institutional-requirements/<institution>.md`, rewrite the
+> rules, and add a matching flag under `institutional_requirements:` in
+> `config/defaults.yaml`.
+
 ## 1. Minimum course duration
 
 **6 training hours minimum.** A course request under 6 total hours is not

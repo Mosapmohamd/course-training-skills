@@ -18,6 +18,8 @@ explicit request in the current conversation.
 - Preferred notebook usage: only for courses where code is actually run.
 - Preferred slide density: sparse — more slides with less text; one idea per
   slide, cards and big statements over bullet lists.
-- Language: Arabic (Egyptian colloquial) for content; technical and platform
-  terms stay in English (Headline, About, Recruiter, Prompt…).
+- Language: write content in the language of the course request (an Arabic
+  request gets Arabic content, an English request gets English). For Arabic,
+  default to Egyptian colloquial; technical and platform terms stay in English
+  (Headline, About, Recruiter, Prompt…).
 - Tone: direct and practical, minimal fluff.

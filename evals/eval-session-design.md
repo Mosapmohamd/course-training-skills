@@ -10,6 +10,6 @@
 | Correctness | Every Topic listed is used by ≥1 downstream artifact, or explicitly marked background-only |
 | Learning Objective Alignment | Session objectives trace to course objectives |
 | Consistency | No Topic requires a prerequisite not yet taught (check against prior sessions) |
-| Artifact Quality | All required session fields present (`README.md` §10) |
+| Artifact Quality | All required session fields present (`docs/specification.md` §10) |
 
 **Reference output:** `courses/machine-learning-beginners/sessions/session-01.md` + `session-01-agenda.md`.

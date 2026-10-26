@@ -29,7 +29,7 @@ with no mapping is invalid — either tie it to an existing objective or drop
 it. `assessment-designer` must not test a concept absent from that session's
 (or an earlier session's) Topics/Explanation — cross-check against
 `references/instructional-design/learning-progression.md` and flag violations
-the way `course-reviewer`'s worked example in `README.md` §17 does.
+the way `course-reviewer`'s worked example in `docs/specification.md` §17 does.
 
 ## Required fields per assessment
 

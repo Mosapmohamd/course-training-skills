@@ -67,7 +67,7 @@ than rewritten from zero.
 cross-artifact consistency (the same 13 checks), not a from-scratch course.
 
 ## What this example demonstrates
-Exactly the principle `README.md` §30 states: "Do not rebuild unrelated
+Exactly the principle `docs/specification.md` §30 states: "Do not rebuild unrelated
 sessions." Here, *every* session happens to be touched because the
 requested change was course-wide (session count), unlike the single-session
 edit example already in `adaptation-rules.md`. The blast-radius analysis

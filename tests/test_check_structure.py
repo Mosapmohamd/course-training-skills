@@ -1,6 +1,6 @@
 """
 Tests for scripts/check_structure.py — repository scaffolding completeness
-(README.md §35: "Output structure").
+(docs/specification.md §35: "Output structure").
 """
 import os
 import sys

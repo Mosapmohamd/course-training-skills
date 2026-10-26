@@ -1,0 +1,16 @@
+{
+  "name": "course-training-skills",
+  "owner": {
+    "name": "Mosap Abdel-Ghany"
+  },
+  "description": "Claude skills for designing complete training courses.",
+  "plugins": [
+    {
+      "name": "course-training-skills",
+      "source": "./",
+      "description": "Modular Claude Skills toolkit for designing complete training courses from course requirements to instructor-ready materials.",
+      "license": "MIT",
+      "category": "education"
+    }
+  ]
+}
