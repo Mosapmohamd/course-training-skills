@@ -131,3 +131,18 @@ def test_parse_duration_invalid_raises():
     import pytest
     with pytest.raises(ValueError):
         vm.parse_duration_to_hours("banana")
+
+
+def test_arabic_requires_rtl():
+    m = base_manifest()
+    m["delivery"]["language"] = "ar"
+    m["delivery"]["direction"] = "ltr"
+    assert any("rtl" in e for e in vm.validate(m))
+    m["delivery"]["direction"] = "rtl"
+    assert vm.validate(m) == []
+
+
+def test_invalid_language_rejected():
+    m = base_manifest()
+    m["delivery"]["language"] = "fr"
+    assert any("delivery.language" in e for e in vm.validate(m))

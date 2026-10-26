@@ -24,6 +24,8 @@ REQUIRED_DELIVERY_FIELDS = ["mode"]
 REQUIRED_ARTIFACT_FIELDS = ["slides", "notebooks", "assessments", "instructor_guide"]
 VALID_LEVELS = {"Beginner", "Intermediate", "Advanced"}
 VALID_MODES = {"offline", "online", "hybrid"}
+VALID_LANGUAGES = {"ar", "en"}
+VALID_DIRECTIONS = {"rtl", "ltr"}
 VALID_STATUS_VALUES = {
     "pending", "in_progress", "approved", "not_applicable", "passed", "failed"
 }
@@ -88,6 +90,12 @@ def validate(manifest: dict) -> list:
             errors.append(f"delivery.{f} is required")
     if delivery.get("mode") not in VALID_MODES and "mode" in delivery:
         errors.append(f"delivery.mode must be one of {VALID_MODES}, got {delivery.get('mode')!r}")
+    if "language" in delivery and delivery["language"] not in VALID_LANGUAGES:
+        errors.append(f"delivery.language must be one of {VALID_LANGUAGES}, got {delivery['language']!r}")
+    if "direction" in delivery and delivery["direction"] not in VALID_DIRECTIONS:
+        errors.append(f"delivery.direction must be one of {VALID_DIRECTIONS}, got {delivery['direction']!r}")
+    if delivery.get("language") == "ar" and delivery.get("direction") != "rtl":
+        errors.append("delivery.direction must be 'rtl' when delivery.language is 'ar'")
 
     artifacts = manifest["artifacts"]
     for f in REQUIRED_ARTIFACT_FIELDS:

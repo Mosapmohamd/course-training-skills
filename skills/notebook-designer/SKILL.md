@@ -66,6 +66,9 @@ When not warranted: a one-line note in the session's status
    a TODO). No Solutions section.
 5. **Generate the instructor notebook**: same structure, TODOs filled in
    correctly, plus a Solutions section with complete code and commentary.
+5b. **Arabic courses** (`delivery.direction: rtl`): every markdown cell is
+   wrapped in `<div dir="rtl">`; code, comments and output stay English/LTR
+   (`references/localization/arabic-rtl.md` §5).
 6. **Content discipline check**: every function/library/concept used in
    either notebook must appear in this session's (or an earlier session's)
    Topics/Explanation. If something new is genuinely needed, add a brief

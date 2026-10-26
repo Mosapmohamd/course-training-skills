@@ -62,6 +62,9 @@ not on the slide.
 
 ## Right-to-left (Arabic) decks
 
+Full cross-format rules (dialect, numbers, bidi, fonts): `references/localization/arabic-rtl.md`.
+
+
 - Align text right and lay rows out right-to-left (reverse flex rows; in
   grids, place the first item in the right-hand cell).
 - Arabic text that contains English terms renders in the wrong word order
@@ -71,6 +74,8 @@ not on the slide.
 - English-only lines (code, sample headlines, sample messages) stay
   left-to-right and unwrapped.
 - Arrows in RTL flows point left (`←`) for "next".
+- Mirror the frame too: slide number bottom-left, footer text bottom-right,
+  eyebrows and titles anchored to the right margin.
 
 ## Per-slide required fields
 

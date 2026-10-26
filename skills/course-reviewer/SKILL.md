@@ -37,7 +37,8 @@ sessions named in a scoped adaptation review).
 `references/instructional-design/learning-progression.md`,
 `references/instructional-design/course-architecture.md`,
 `references/institutional-requirements/course-bag-program.md` (the
-Institutional requirements check).
+Institutional requirements check), `references/localization/arabic-rtl.md`
+(the Language & direction check).
 
 ## Templates
 `templates/course-review-template.md`
@@ -48,7 +49,7 @@ The user (final gate before the package is considered done);
 
 ## Procedure
 
-1. Run each of the 14 checks in `references/quality/quality-standards.md`
+1. Run each of the 15 checks in `references/quality/quality-standards.md`
    against the current artifact set.
 2. For each failure, classify: **auto-fixable** (unambiguous — retiming an
    agenda, linking an orphaned objective, adding a missing required field) vs.

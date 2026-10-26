@@ -19,6 +19,8 @@ Reviewer: `course-reviewer` skill
 | Notebook alignment | {{pass/fail}} | |
 | Instructor guide alignment | {{pass/fail}} | |
 | Cross-artifact consistency | {{pass/fail}} | |
+| Language & direction | {{pass/fail}} | |
+| Institutional requirements | {{pass/fail/N/A}} | |
 
 ## Issues Found
 1. {{issue}} — {{fixed automatically | needs instructor decision}}

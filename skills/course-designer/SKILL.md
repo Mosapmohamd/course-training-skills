@@ -39,6 +39,7 @@ None — this is the entry point.
 - `references/instructional-design/course-architecture.md` (state/manifest schema)
 - `references/adaptation/adaptation-rules.md`
 - `references/instructional-design/course-architecture.md#research-policy`
+- `references/localization/arabic-rtl.md` (course language, Arabic variety, RTL output)
 - `references/institutional-requirements/course-bag-program.md` (minimum
   duration, certificate threshold, course-bag submission form)
 
@@ -58,6 +59,12 @@ question ONLY when a missing/ambiguous value would materially change the
 course design (e.g. session count/duration arithmetic doesn't resolve
 cleanly, or level is genuinely unclear from context) — not for anything
 inferable.
+
+**Language (same step):** decide the course language per
+`references/localization/arabic-rtl.md` §1 (default: the language of the
+request) and record `delivery.language` and `delivery.direction` in the
+manifest in Step 3, so every downstream skill writes in that language and
+direction.
 
 **Instructor profile check (same step):** if `config/instructor-profile.md`
 (or its `.local` override, per the root `SKILL.md`) still has `{{...}}`
@@ -141,7 +148,7 @@ produce the course-bag submission package per
   Department, promotional image description).
 - `courses/<course-id>/course-bag/timetable.xlsx`
   (`templates/course-bag-timetable-template.md`'s column spec) — a real
-  spreadsheet, one row per session.
+  spreadsheet, one row per session (right-to-left sheet for Arabic courses).
 
 If the course is under 20 hours, repeat the certificate note from Step 1 in
 the draft rather than assuming the instructor still remembers it from
@@ -149,6 +156,7 @@ earlier in the conversation.
 
 ## Validation
 - [ ] Manifest passes `scripts/validate_manifest.py`
+- [ ] `delivery.language` / `delivery.direction` recorded; for RTL courses `scripts/validate_course.py` passes its direction checks
 - [ ] No skill was asked to produce content outside its declared responsibility
 - [ ] Every approval checkpoint (interactive mode) was honored, not skipped
 - [ ] `status` accurately reflects what's actually been generated

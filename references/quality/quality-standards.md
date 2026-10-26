@@ -9,7 +9,7 @@ its output ready for approval.
 check, Activity purpose check, Practical alignment check, Assessment
 alignment check, Difficulty check, Slide alignment check, Notebook alignment
 check, Instructor guide alignment check, Cross-artifact consistency check,
-Institutional requirements check`
+Language & direction check, Institutional requirements check`
 (`docs/specification.md` §37, extended with the institutional requirements check for
 programs like "حقيبة الكورسات" — see
 `references/institutional-requirements/course-bag-program.md`).
@@ -31,6 +31,7 @@ programs like "حقيبة الكورسات" — see
 | Notebook alignment | Notebook matches the session; no unexplained concepts |
 | Instructor guide alignment | Guide references the session's real agenda/activities, not generic advice |
 | Cross-artifact consistency | No contradictions between artifacts for the same session (the XGBoost example, `docs/specification.md` §17) |
+| Language & direction | Every artifact is in `delivery.language`, one Arabic variety per artifact (formal documents in MSA), and for `delivery.direction: rtl` every markdown file, notebook markdown cell, slide paragraph and spreadsheet is right-to-left — `references/localization/arabic-rtl.md`; direction is machine-checked by `scripts/validate_course.py` |
 | Institutional requirements | `schedule.total_hours` meets the program's minimum (6h) and, if under the certificate threshold (20h), the certificate rule is noted rather than silently omitted — `references/institutional-requirements/course-bag-program.md`. Only when `institutional_requirements.course_bag_program: true` in `config/defaults.yaml`; otherwise N/A |
 
 ## Skill contract shape

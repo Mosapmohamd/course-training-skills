@@ -47,6 +47,13 @@ config file, if a `.local` variant exists (for example
 file. Values still written as `{{...}}` are unfilled placeholders: never
 treat them as real data and never invent a replacement.
 
+## Language and direction
+
+Write the course in the language of the request. Arabic courses are
+right-to-left in every artifact (markdown, notebooks, slides, spreadsheets),
+in the Arabic variety set in `config/defaults.yaml`. Follow
+`references/localization/arabic-rtl.md`.
+
 ## Non-negotiables (see `docs/specification.md` §38 for the full list)
 
 - Never build this as one giant skill — always delegate to the specific skill above.

@@ -148,3 +148,57 @@ def test_parse_minutes():
     assert vc.parse_minutes("2h") == 120.0
     assert vc.parse_minutes("90m") == 90.0
     assert vc.parse_minutes(45) == 45.0
+
+
+# --- Right-to-left (Arabic) checks: references/localization/arabic-rtl.md ---
+
+def test_rtl_markdown_requires_wrapper(tmp_path):
+    bad = write(str(tmp_path), "bad.md", "# عنوان\n\nنص عربي\n")
+    good = write(str(tmp_path), "good.md", '<div dir="rtl">\n\n# عنوان\n\nنص عربي\n\n</div>\n')
+    english = write(str(tmp_path), "en.md", "# Title\n\nEnglish only\n")
+    assert vc.validate_rtl_markdown(bad)
+    assert vc.validate_rtl_markdown(good) == []
+    assert vc.validate_rtl_markdown(english) == []
+
+
+def test_rtl_notebook_markdown_cells(tmp_path):
+    nb = {"nbformat": 4, "nbformat_minor": 5, "metadata": {}, "cells": [
+        {"cell_type": "markdown", "metadata": {}, "source": ["# عنوان"]},
+        {"cell_type": "markdown", "metadata": {}, "source": ['<div dir="rtl">\n\nشرح\n\n</div>']},
+        {"cell_type": "code", "metadata": {}, "source": ["print('hi')"], "outputs": [], "execution_count": None},
+    ]}
+    path = write(str(tmp_path), "nb.ipynb", json.dumps(nb, ensure_ascii=False))
+    errors = vc.validate_rtl_notebook(path)
+    assert len(errors) == 1 and "cell 0" in errors[0]
+
+
+def _zip(path, files):
+    with zipfile.ZipFile(path, "w") as z:
+        for name, data in files.items():
+            z.writestr(name, data)
+
+
+def test_rtl_pptx_paragraphs(tmp_path):
+    good = '<p:sld><a:p><a:pPr rtl="1" algn="r"/><a:r><a:t>مرحبا</a:t></a:r></a:p><a:p><a:r><a:t>Hello</a:t></a:r></a:p></p:sld>'
+    bad = '<p:sld><a:p><a:pPr algn="r"/><a:r><a:t>مرحبا</a:t></a:r></a:p></p:sld>'
+    gp, bp = os.path.join(str(tmp_path), "g.pptx"), os.path.join(str(tmp_path), "b.pptx")
+    _zip(gp, {"ppt/slides/slide1.xml": good})
+    _zip(bp, {"ppt/slides/slide1.xml": bad})
+    assert vc.validate_rtl_pptx(gp) == []
+    assert vc.validate_rtl_pptx(bp)
+
+
+def test_rtl_xlsx_sheet_direction(tmp_path):
+    gp, bp = os.path.join(str(tmp_path), "g.xlsx"), os.path.join(str(tmp_path), "b.xlsx")
+    _zip(gp, {"xl/worksheets/sheet1.xml": '<worksheet><sheetViews><sheetView rightToLeft="1" workbookViewId="0"/></sheetViews></worksheet>'})
+    _zip(bp, {"xl/worksheets/sheet1.xml": '<worksheet><sheetViews><sheetView workbookViewId="0"/></sheetViews></worksheet>'})
+    assert vc.validate_rtl_xlsx(gp) == []
+    assert vc.validate_rtl_xlsx(bp)
+
+
+def test_rtl_pptx_checks_layouts(tmp_path):
+    bad_layout = '<p:sldLayout><a:p><a:pPr algn="r"/><a:r><a:t>تذييل</a:t></a:r></a:p></p:sldLayout>'
+    path = os.path.join(str(tmp_path), "l.pptx")
+    _zip(path, {"ppt/slides/slide1.xml": "<p:sld/>", "ppt/slideLayouts/slideLayout1.xml": bad_layout})
+    errors = vc.validate_rtl_pptx(path)
+    assert errors and "slideLayout1" in errors[0]

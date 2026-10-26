@@ -76,8 +76,11 @@ instructional content).
 7. Give every activity in `activities/session-NN-activities.md` (embedded
    micro-activities included) its own Instructions slide where it runs, per
    `slide-patterns.md#activity-slides`.
-8. If the course language is right-to-left, apply
-   `slide-patterns.md#right-to-left-arabic-decks` in Stage 2.
+8. If the manifest says `delivery.direction: rtl`, write the spec in Arabic
+   and apply `slide-patterns.md#right-to-left-arabic-decks` plus
+   `references/localization/arabic-rtl.md` §5 (Slides) in Stage 2: every
+   Arabic paragraph RTL and right-aligned, mirrored layout, Arabic-capable
+   fonts.
 
 ### Stage 2 — presentation generation
 1. Check whether a presentation/design capability is available in this

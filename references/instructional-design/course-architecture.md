@@ -75,6 +75,8 @@ schedule:
   session_duration: string  # e.g. "2h", "90m" — normalize to minutes for validation
 delivery:
   mode: offline|online|hybrid
+  language: ar|en          # optional; default en. See references/localization/arabic-rtl.md
+  direction: rtl|ltr       # optional; must be rtl when language is ar
 artifacts:
   slides: boolean
   notebooks: boolean|auto

@@ -32,6 +32,7 @@ REQUIRED_REFERENCE_FILES = [
     "adaptation/adaptation-rules.md",
     "quality/quality-standards.md",
     "institutional-requirements/course-bag-program.md",
+    "localization/arabic-rtl.md",
 ]
 
 REQUIRED_TEMPLATES = [

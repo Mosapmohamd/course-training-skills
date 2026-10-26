@@ -20,6 +20,8 @@ explicit request in the current conversation.
   slide, cards and big statements over bullet lists.
 - Language: write content in the language of the course request (an Arabic
   request gets Arabic content, an English request gets English). For Arabic,
-  default to Egyptian colloquial; technical and platform terms stay in English
-  (Headline, About, Recruiter, Prompt…).
+  default to Egyptian colloquial (set `language.arabic_variety` in
+  `defaults.yaml`); technical and platform terms stay in English (Headline,
+  About, Recruiter, Prompt…). Arabic output is right-to-left in every file —
+  see `references/localization/arabic-rtl.md`.
 - Tone: direct and practical, minimal fluff.

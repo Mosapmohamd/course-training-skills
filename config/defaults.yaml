@@ -18,6 +18,12 @@ defaults:
     - Assessment
     - Recap
 
+# Content language and direction. Rules: references/localization/arabic-rtl.md
+language:
+  content: auto             # auto = language of the course request | ar | en
+  arabic_variety: egyptian  # egyptian | msa (formal/institutional documents are always MSA)
+  rtl: auto                 # auto = right-to-left for every Arabic artifact
+
 # Optional institution-specific rule sets. All are off by default.
 # Turn one on only if you submit courses to that institution.
 institutional_requirements:
