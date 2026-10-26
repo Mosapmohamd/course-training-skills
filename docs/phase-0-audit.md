@@ -30,13 +30,13 @@ Skills
   Phase 8: slide-designer
 
 References
-  9 domains per README §25, one file per topic, no duplication across skills
+  9 domains per docs/specification.md §25, one file per topic, no duplication across skills
 
 Templates
-  10 templates per README §26, structure only — no instructional content
+  10 templates per docs/specification.md §26, structure only — no instructional content
 
 Configuration
-  4 files per README §23 — instructor-specific, never hardcoded into skills
+  4 files per docs/specification.md §23 — instructor-specific, never hardcoded into skills
 
 Scripts
   validate_manifest.py  — manifest schema + timing arithmetic

@@ -1,0 +1,31 @@
+name: Bug report
+description: Installation failed, a skill errored, or a generated file is broken
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where are you using it?
+      options:
+        - Claude (web, desktop or mobile)
+        - Claude Code
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: What did you ask for?
+      description: Paste the course request you gave Claude.
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened?
+      description: Error message, wrong file, missing output. Screenshots help.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?

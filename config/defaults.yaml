@@ -1,5 +1,5 @@
 instructor:
-  name: "Mosap Abdel-Ghany"   # full identity + contact channels: config/instructor-profile.md
+  name: "{{Your full name}}"   # full identity + contact channels: config/instructor-profile.md
 
 defaults:
   research: false
@@ -17,3 +17,11 @@ defaults:
     - Break
     - Assessment
     - Recap
+
+# Optional institution-specific rule sets. All are off by default.
+# Turn one on only if you submit courses to that institution.
+institutional_requirements:
+  # "حقيبة الكورسات" (Course Bag) program: 6-hour minimum, certificate only
+  # at 20+ hours, 13-field submission draft + timetable.xlsx.
+  # Rules: references/institutional-requirements/course-bag-program.md
+  course_bag_program: false

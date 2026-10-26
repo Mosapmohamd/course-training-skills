@@ -24,7 +24,7 @@ nine skills — never duplicate their content-generation logic itself.
 
 ## Inputs
 Raw user request (course name, audience, level, duration, sessions, session
-duration, optional extras — `README.md` §4). For adaptation: an existing
+duration, optional extras — `docs/specification.md` §4). For adaptation: an existing
 `courses/<id>/course-manifest.yaml` plus the requested change.
 
 ## Outputs
@@ -53,13 +53,23 @@ ready to review.
 
 ### 1. Parse requirements
 Extract required fields; infer reasonable defaults for optional fields
-(`README.md` §3: "do not ask unnecessary questions"). Ask a clarifying
+(`docs/specification.md` §3: "do not ask unnecessary questions"). Ask a clarifying
 question ONLY when a missing/ambiguous value would materially change the
 course design (e.g. session count/duration arithmetic doesn't resolve
 cleanly, or level is genuinely unclear from context) — not for anything
 inferable.
 
-**Institutional requirements check (same step, not deferred):** as soon as
+**Instructor profile check (same step):** if `config/instructor-profile.md`
+(or its `.local` override, per the root `SKILL.md`) still has `{{...}}`
+placeholders for name or titles, mention it once in your first reply: the
+trainer intro, contact and closing slides will show bracketed placeholders
+unless the instructor gives you those details now. Do not block on it.
+
+**Institutional requirements check (same step, not deferred), only when
+`institutional_requirements.course_bag_program: true` in
+`config/defaults.yaml`** (or the user explicitly asks for the course-bag
+program in this conversation). When it is off, skip this check and Step 8
+entirely and do not mention the program. When it is on, as soon as
 `total_hours` is known, check it against
 `references/institutional-requirements/course-bag-program.md`:
 - **Under 6 hours:** flag immediately — this course isn't eligible for the
@@ -97,7 +107,7 @@ assessment-designer (per session + final)
 instructor-guide (per session)
 course-reviewer (whole course)
 ```
-This mirrors `README.md` §5 and §29. In full mode, run straight through,
+This mirrors `docs/specification.md` §5 and §29. In full mode, run straight through,
 still validating each phase's output before moving to the next (do not skip
 validation just because there's no user checkpoint).
 
@@ -105,7 +115,7 @@ validation just because there's no user checkpoint).
 After Outline, after Session Design, after Activities+Practical Work, and
 after Notebooks+Slides *if the instructor asked to review them* — present
 the artifact, accept edits, re-validate, then proceed. Do not create a
-checkpoint after every micro-step (`README.md` §29).
+checkpoint after every micro-step (`docs/specification.md` §29).
 
 ### 6. Track dependencies and status
 After each skill completes, update `status` in the manifest. When the user
@@ -120,7 +130,8 @@ whole course. Report the result to the user; if it fails, fix what's
 fixable and re-run, or surface what needs an instructor decision.
 
 ### 8. Offer the course-bag submission draft
-After a passing final review, offer (don't auto-generate unasked) to
+Only when the course-bag program is enabled (see Step 1). After a passing
+final review, offer (don't auto-generate unasked) to
 produce the course-bag submission package per
 `references/institutional-requirements/course-bag-program.md` §3–4:
 - `courses/<course-id>/course-bag/submission-draft.md`
@@ -141,5 +152,6 @@ earlier in the conversation.
 - [ ] No skill was asked to produce content outside its declared responsibility
 - [ ] Every approval checkpoint (interactive mode) was honored, not skipped
 - [ ] `status` accurately reflects what's actually been generated
-- [ ] The institutional requirements check (Step 1) ran before the course
-      was designed, not discovered only at the final review
+- [ ] If the course-bag program is enabled, the institutional requirements
+      check (Step 1) ran before the course was designed, not discovered only
+      at the final review; if it is disabled, the program was not mentioned

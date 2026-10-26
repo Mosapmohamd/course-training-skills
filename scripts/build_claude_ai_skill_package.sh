@@ -37,6 +37,16 @@ rm -rf .pytest_cache
 # claude.ai skills can't carry a Claude Code plugin manifest
 rm -rf .claude-plugin
 
+# Apply personal config overrides (config/*.local.*, git-ignored):
+# each one replaces its base file, so your upload zip carries your details
+# while the public repo stays generic. See config/README.md.
+for f in config/*.local.*; do
+  [ -e "$f" ] || continue
+  base="${f/.local/}"
+  mv "$f" "$base"
+  echo "Applied personal override: $base"
+done
+
 # Rename every sub-skill's SKILL.md so only the root SKILL.md remains
 for f in skills/*/SKILL.md; do
   mv "$f" "$(dirname "$f")/INSTRUCTIONS.md"

@@ -10,7 +10,7 @@ Decide *what* the course teaches and in what order, at the course level only.
 
 ## Trigger
 - A new course request (name, audience, level, duration, sessions, session
-  duration; optional extras per `README.md` §4).
+  duration; optional extras per `docs/specification.md` §4).
 - `/course-outline` invoked directly.
 - `course-designer` invokes this as the first generation step after
   requirements are parsed.

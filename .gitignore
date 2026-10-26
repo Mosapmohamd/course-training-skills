@@ -3,3 +3,6 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 dist/
+
+# Personal config overrides (see config/README.md)
+config/*.local.*

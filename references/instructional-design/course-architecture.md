@@ -23,7 +23,7 @@ Topics. `assessment-designer` must not test a concept not in Explanation/Topics.
 
 ## Course state schema
 
-Canonical in-memory/working shape (see `README.md` §18 for the annotated
+Canonical in-memory/working shape (see `docs/specification.md` §18 for the annotated
 version). `course-designer` owns writing this; every other skill reads it and
 proposes updates rather than mutating it silently.
 
@@ -56,7 +56,7 @@ status:
 
 Persisted per-course at `courses/<course-id>/course-manifest.yaml`. This is
 the file `scripts/validate_manifest.py` checks. Full annotated example:
-`README.md` §19; machine-checkable schema notes below.
+`docs/specification.md` §19; machine-checkable schema notes below.
 
 Required top-level keys: `course`, `schedule`, `delivery`, `artifacts`,
 `research`, `status`.

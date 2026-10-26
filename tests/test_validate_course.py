@@ -1,6 +1,6 @@
 """
 Tests for scripts/validate_course.py — agenda timing, notebook JSON
-validity, and pptx structural validity (README.md §35: "Agenda timing",
+validity, and pptx structural validity (docs/specification.md §35: "Agenda timing",
 "Output structure").
 """
 import json

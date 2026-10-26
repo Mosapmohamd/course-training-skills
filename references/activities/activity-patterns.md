@@ -8,7 +8,7 @@ Used by: `activity-designer`.
 
 An activity is only valid if you can state, in one sentence, which specific
 learning objective it serves and how the debrief proves it happened. If you
-cannot, do not include the activity (see `README.md` §38: "do not generate
+cannot, do not include the activity (see `docs/specification.md` §38: "do not generate
 activities without educational purpose").
 
 ## Pattern catalog
@@ -55,7 +55,7 @@ listening stretches and the room itself is a resource. So:
 | Group battle | Groups of 4 draft several options, pick their best, present aloud, room applauds the winner | Persuasive/creative writing (hooks, pitches, openings) | paper |
 | Role reversal ("You're the recruiter/client/user") | Groups get a printed brief card and act from the other side, then check their own work against it | Seeing one's work through the evaluator's eyes | printed brief cards |
 
-## Anti-patterns (README §38)
+## Anti-patterns (docs/specification.md §38)
 
 - Selecting an activity for energy/fun alone with no traceable objective.
 - Reusing the exact same activity type in every session (monotony; also a

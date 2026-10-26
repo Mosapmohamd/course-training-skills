@@ -27,6 +27,8 @@ This session's Topics, Key Concepts, Examples (`session-designer`);
 Activities/Exercise names for Instructions/Exercise-type slides;
 `config/instructor-profile.md` (Trainer Intro, Contact, Closing slides);
 `config/presentation-style.md` (Stage 2 only).
+For each config file, read its `.local` variant instead when one exists
+(e.g. `config/instructor-profile.local.md`, see `config/README.md`).
 
 ## Outputs
 Stage 1: `slides/session-NN-slides.md`, one entry per
@@ -68,8 +70,9 @@ instructional content).
 6. Wrap the deck in the frame from `slide-patterns.md#deck-frame`: Title →
    Trainer Intro → Agenda → Objectives → … → Recap → Q&A → Contact
    (penultimate) → Closing "Thank You" (last). Fill the Trainer Intro and
-   Contact from `config/instructor-profile.md`; a missing value becomes a
-   bracketed placeholder listed in the hand-off, never an invented one.
+   Contact from `config/instructor-profile.md`; a missing value, or one still
+   written as `{{...}}`, becomes a bracketed placeholder (`[Your full name]`)
+   listed in the hand-off, never an invented one.
 7. Give every activity in `activities/session-NN-activities.md` (embedded
    micro-activities included) its own Instructions slide where it runs, per
    `slide-patterns.md#activity-slides`.

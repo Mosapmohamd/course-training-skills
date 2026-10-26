@@ -2,7 +2,7 @@
 
 Reviewed as an external contributor would, per
 `IMPLEMENTATION_PROMPT.md`'s Phase 17 / final-review checklist
-(`README.md` §24).
+(`docs/specification.md` §24).
 
 | Area | Status | Notes |
 |---|---|---|
