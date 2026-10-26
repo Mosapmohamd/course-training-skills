@@ -13,9 +13,9 @@ to remember or re-check them by hand every time.
 > `config/defaults.yaml`. They are off by default, because most instructors
 > don't submit to this program.
 >
-> **Last checked by the maintainer: October 2026.** Institutions change
-> their rules. Always confirm against the program's current submission form
-> before submitting. If the form and this file disagree, the form wins, and
+> **Check the official form.** Institutions change their rules. Always
+> confirm these rules against the program's current submission form before
+> submitting. If the form and this file disagree, the form wins, and
 > please open an issue so this file can be updated.
 >
 > **Adding another institution:** copy this file to

@@ -1,0 +1,38 @@
+course:
+  id: cv-writing-fresh-graduates-ar
+  name: كتابة السيرة الذاتية الاحترافية (CV) لحديثي التخرج
+  audience: Fresh graduates and final-year students
+  level: Beginner
+
+schedule:
+  total_hours: 3
+  sessions: 1
+  session_duration: 3h
+
+delivery:
+  mode: offline
+  language: ar
+  direction: rtl
+  class_size: 24
+  internet: false
+  hardware: printed CVs or laptops (learner-owned)
+  software: any word processor (Word / Google Docs) — optional
+
+artifacts:
+  slides: true
+  notebooks: false
+  assessments: true
+  instructor_guide: true
+
+research:
+  enabled: false
+
+status:
+  outline: approved
+  sessions: approved
+  activities: approved
+  notebooks: not_applicable   # soft-skills course, no code
+  slides: approved
+  assessments: approved
+  instructor_guide: approved
+  review: passed

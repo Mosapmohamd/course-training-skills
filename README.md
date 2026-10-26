@@ -9,7 +9,8 @@ content, assessments, and an instructor guide. Then it reviews everything for
 consistency.
 
 Built for instructors and trainers who spend days preparing each course and
-would rather spend that time teaching.
+would rather spend that time teaching. **Works in Arabic and English:** ask in
+Arabic and every file comes out in Arabic, right-to-left, including the slides.
 
 > **Everything it produces is a draft.** It is a strong starting point, not a
 > replacement for your judgment. Review the content before you teach it,
@@ -46,9 +47,16 @@ courses/machine-learning-beginners/
 └── review/                  # automated quality review of the whole package
 ```
 
-**See a real example:** [`courses/machine-learning-beginners/`](courses/machine-learning-beginners/).
-Session 1 is fully generated, including an editable 19-slide deck ([`session-01-slides.pptx`](courses/machine-learning-beginners/slides/session-01-slides.pptx)); Sessions 2–6 are at outline and agenda level
-([details](examples/machine-learning/README.md)).
+**See real examples:**
+
+- **Arabic (RTL):** [`courses/cv-writing-fresh-graduates-ar/`](courses/cv-writing-fresh-graduates-ar/),
+  a complete 3-hour CV-writing workshop in Egyptian Arabic, with a 23-slide
+  right-to-left deck ([`session-01-slides.pptx`](courses/cv-writing-fresh-graduates-ar/slides/session-01-slides.pptx))
+  ([details](examples/cv-writing-arabic/README.md)).
+- **English:** [`courses/machine-learning-beginners/`](courses/machine-learning-beginners/),
+  a 12-hour Machine Learning course. Session 1 is fully generated, including a
+  19-slide deck ([`session-01-slides.pptx`](courses/machine-learning-beginners/slides/session-01-slides.pptx));
+  Sessions 2–6 are at outline and agenda level ([details](examples/machine-learning/README.md)).
 
 ### How it works
 
@@ -61,6 +69,11 @@ Session 1 is fully generated, including an editable 19-slide deck ([`session-01-
 - **Small changes stay small.** Ask to go from 6 sessions to 4, or from
   in-person to online, and it updates only the affected parts.
 - **Timing is checked.** Agendas must add up to the exact session length.
+- **Arabic done properly.** Arabic courses are right-to-left in every file
+  (markdown, notebooks, slides, spreadsheets), in Egyptian colloquial or
+  Modern Standard Arabic (your choice), with formal documents always in MSA.
+  The validator checks the direction automatically
+  ([rules](references/localization/arabic-rtl.md)).
 
 ---
 
@@ -136,7 +149,7 @@ All personal and stylistic settings live in [`config/`](config/README.md):
 | `instructor-profile.md` | Your name, titles and contact channels for the intro, contact and thank-you slides |
 | `teaching-preferences.md` | Delivery mode, activity pacing, assessment style, language and tone |
 | `presentation-style.md` | Fonts, colors and slide layouts |
-| `defaults.yaml` | Workflow defaults and optional institution rules |
+| `defaults.yaml` | Workflow defaults, content language and Arabic variety, optional institution rules |
 
 Until you fill in your profile, the slides show bracketed placeholders such as
 `[Your full name]`. Nothing is invented.
@@ -152,8 +165,8 @@ If you submit courses to this program, set
 `institutional_requirements.course_bag_program: true` in `config/defaults.yaml`.
 The toolkit will then check the program's minimum hours and certificate
 threshold up front, and generate the submission draft and `timetable.xlsx`.
-It is off by default. The rules were last checked in October 2026; always
-confirm against the program's current form
+It is off by default. Always confirm the rules against the program's current
+submission form before you submit
 ([rules file](references/institutional-requirements/course-bag-program.md)).
 You can add your own institution's rules the same way.
 
@@ -164,6 +177,9 @@ You can add your own institution's rules the same way.
 - **Editable slide decks** need a slide-making capability in your Claude
   environment. Without one, you get a detailed slide specification
   (content, visuals and speaker notes per slide) instead of a deck file.
+- **Fonts.** The default deck fonts are Cairo and IBM Plex Sans Arabic (free
+  on Google Fonts). Install them, or change them in
+  `config/presentation-style.md`, or PowerPoint will substitute another font.
 - **Quality depends on the topic.** It is strongest for subjects Claude knows
   well. For fast-moving or niche topics, ask it to research, and check the
   facts yourself.
@@ -192,6 +208,8 @@ The full design specification is in [`docs/specification.md`](docs/specification
 
 ---
 
+<div dir="rtl">
+
 ## بالعربي
 
 **Course Training Skills** أداة مجانية مفتوحة المصدر بتشتغل مع Claude. بتاخد منك
@@ -199,6 +217,10 @@ The full design specification is in [`docs/specification.md`](docs/specification
 كاملة: خطة الكورس، أجندة كل محاضرة بالدقيقة، أنشطة وألعاب تدريبية، تمارين عملية،
 Notebooks لو الموضوع فيه كود، محتوى السلايدز، اختبارات، ودليل للمدرب. وفي الآخر
 بتراجع كل ده وتتأكد إنه متسق.
+
+**بتشتغل بالعربي:** لو طلبت بالعربي، كل الملفات بتطلع بالعربي ومن اليمين للشمال،
+حتى السلايدز. شوف المثال الجاهز:
+[ورشة كتابة الـ CV لحديثي التخرج](courses/cv-writing-fresh-graduates-ar/).
 
 **المتطلبات:** اشتراك Claude مدفوع (Pro أو Max أو Team أو Enterprise) مع تفعيل
 Code execution and file creation، أو Claude Code.
@@ -214,13 +236,17 @@ Code execution and file creation، أو Claude Code.
 
 **خلّيها بتاعتك:** اكتب اسمك وألقابك وطرق التواصل في
 `config/instructor-profile.md`، وغيّر الألوان والخطوط من
-`config/presentation-style.md`. ولو بتقدّم على برنامج «حقيبة الكورسات» فعّل
+`config/presentation-style.md`، واختار العامية المصرية أو الفصحى من
+`language.arabic_variety` في `config/defaults.yaml`. نزّل خطوط Cairo وIBM Plex
+Sans Arabic (مجانية من Google Fonts) عشان السلايدز تظهر زي ما هي. ولو بتقدّم على برنامج «حقيبة الكورسات» فعّل
 `course_bag_program: true` في `config/defaults.yaml`.
 
 **مهم:** اللي بتطلعه الأداة مسودة قوية، مش نسخة نهائية. راجع المحتوى قبل ما تدرّسه.
 
 عندك مشكلة أو اقتراح؟ افتح
 [Issue](https://github.com/Mosapmohamd/course-training-skills/issues/new/choose).
+
+</div>
 
 ---
 
