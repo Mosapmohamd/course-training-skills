@@ -8,7 +8,7 @@ own a downstream artifact.
 When an upstream constraint or artifact changes, identify exactly what's
 downstream of it in the dependency chain (`references/instructional-design/course-architecture.md`)
 and regenerate only that. Never regenerate the whole course for a localized
-change (`README.md` §38, §30).
+change (`docs/specification.md` §38, §30).
 
 ## Common adaptations and their blast radius
 
@@ -35,7 +35,7 @@ change (`README.md` §38, §30).
    change affecting every session).
 6. Report to the user exactly what was regenerated and what was preserved.
 
-## Example (from `README.md` §30)
+## Example (from `docs/specification.md` §30)
 
 ```
 Session 3 changes

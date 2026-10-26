@@ -1,0 +1,22 @@
+name: Course quality feedback
+description: The course was generated, but the content, timing or activities weren't right
+labels: ["quality"]
+body:
+  - type: textarea
+    id: request
+    attributes:
+      label: Course request
+      description: Topic, audience, level, hours and sessions you asked for.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What was wrong?
+      description: For example, too advanced for the audience, activities didn't fit the room, timing off, a concept used before it was taught.
+    validations:
+      required: true
+  - type: textarea
+    id: better
+    attributes:
+      label: What would a good version look like?

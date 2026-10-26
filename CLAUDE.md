@@ -1,7 +1,8 @@
 # CLAUDE.md — Repository Development Instructions
 
 This file is for anyone (human or Claude) developing **inside** this repository.
-`README.md` is the product spec for *using* the toolkit. This file is about
+`README.md` is the user guide and `docs/specification.md` is the full design
+spec for *using* the toolkit. This file is about
 *maintaining and extending* it.
 
 ## Layers — keep them separate
@@ -37,7 +38,7 @@ stop — it belongs in `config/`.
 and mirrored in `scripts/validate_manifest.py`) is the single source of truth for
 a generated course. Skills read from it and write to it — they do not keep
 parallel state. When a skill changes something that affects other skills
-(see the dependency chain in `README.md` §2 and `references/adaptation/adaptation-rules.md`),
+(see the dependency chain in `docs/specification.md` §2 and `references/adaptation/adaptation-rules.md`),
 it updates `status:` in the manifest so `course-designer` and `course-reviewer`
 know what's stale.
 

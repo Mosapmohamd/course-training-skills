@@ -21,7 +21,7 @@ seeing output change, and modifying in place.
 
 Default when genuinely ambiguous: check `config/defaults.yaml
 generate_notebook_when_useful`; if still ambiguous, prefer NOT generating one
-— an unnecessary notebook is clutter (`README.md` §38).
+— an unnecessary notebook is clutter (`docs/specification.md` §38).
 
 ## Structure
 
@@ -48,7 +48,7 @@ broken/incomplete line — never a fully working cell disguised as a TODO.
 
 Do not introduce a library, function, or concept in a notebook that wasn't in
 the session's Topics/Explanation (`course-reviewer` will flag this — see the
-XGBoost example in `README.md` §17). If a notebook needs something not yet
+XGBoost example in `docs/specification.md` §17). If a notebook needs something not yet
 taught, either teach it in a markdown cell first (brief, scoped) or don't use
 it.
 

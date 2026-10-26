@@ -90,7 +90,7 @@ Notes, Interaction`. See `templates/slide-template.md`.
 
 - Avoid text-heavy slides: prefer ≤6 bullets, ≤8 words per bullet as a
   default ceiling; move detail to Speaker Notes.
-- Do not copy instructor notes verbatim onto the slide (`README.md` §38) —
+- Do not copy instructor notes verbatim onto the slide (`docs/specification.md` §38) —
   the slide is the visual anchor, the notes are what's *said*.
 - Do not simply restate the course outline as slide titles — each slide earns
   its place by doing something (teach, show, ask, transition).

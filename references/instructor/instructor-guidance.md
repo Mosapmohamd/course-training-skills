@@ -40,5 +40,5 @@ Fast-Finisher Activity, Recovery Strategy, Transitions, Session Recap`.
 Every field here must match the *actual* session — its real Topics, real
 Agenda block names, and real Activities/Exercise. It is not a generic
 teaching-tips document; it is specific to the session it accompanies
-(`README.md` §16: "the instructor should be able to deliver the session
+(`docs/specification.md` §16: "the instructor should be able to deliver the session
 without redesigning it").

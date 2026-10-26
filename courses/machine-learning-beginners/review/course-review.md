@@ -21,7 +21,7 @@ artifact set + Sessions 2–6 outline-level detail.
 | Slide alignment | PASS (Session 1) | Session 1's slide spec traces to its actual Topics; no outline-copying detected. Stage 2 (.pptx) not generated — see Known Limitations |
 | Notebook alignment | PASS (Session 1) | Both notebooks valid `nbformat` 4 JSON (verified via `scripts/validate_course.py`); student notebook contains no Solutions section; no concept used beyond what Session 1 teaches |
 | Instructor guide alignment | PASS (Session 1) | Fully specific to Session 1's real agenda blocks/activities/exercise, not generic |
-| Cross-artifact consistency | PASS | No contradictions found (e.g. no session teaches X while a later artifact assumes Y not taught — the pattern in `README.md` §17's XGBoost example does not occur here) |
+| Cross-artifact consistency | PASS | No contradictions found (e.g. no session teaches X while a later artifact assumes Y not taught — the pattern in `docs/specification.md` §17's XGBoost example does not occur here) |
 
 ## Issues Found
 

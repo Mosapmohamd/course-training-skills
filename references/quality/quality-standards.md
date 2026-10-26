@@ -10,7 +10,7 @@ check, Activity purpose check, Practical alignment check, Assessment
 alignment check, Difficulty check, Slide alignment check, Notebook alignment
 check, Instructor guide alignment check, Cross-artifact consistency check,
 Institutional requirements check`
-(`README.md` §37, extended with the institutional requirements check for
+(`docs/specification.md` §37, extended with the institutional requirements check for
 programs like "حقيبة الكورسات" — see
 `references/institutional-requirements/course-bag-program.md`).
 
@@ -30,8 +30,8 @@ programs like "حقيبة الكورسات" — see
 | Slide alignment | Slides reflect the session's actual Topics, not invented or copied-outline content |
 | Notebook alignment | Notebook matches the session; no unexplained concepts |
 | Instructor guide alignment | Guide references the session's real agenda/activities, not generic advice |
-| Cross-artifact consistency | No contradictions between artifacts for the same session (the XGBoost example, `README.md` §17) |
-| Institutional requirements | `schedule.total_hours` meets the program's minimum (6h) and, if under the certificate threshold (20h), the certificate rule is noted rather than silently omitted — `references/institutional-requirements/course-bag-program.md` |
+| Cross-artifact consistency | No contradictions between artifacts for the same session (the XGBoost example, `docs/specification.md` §17) |
+| Institutional requirements | `schedule.total_hours` meets the program's minimum (6h) and, if under the certificate threshold (20h), the certificate rule is noted rather than silently omitted — `references/institutional-requirements/course-bag-program.md`. Only when `institutional_requirements.course_bag_program: true` in `config/defaults.yaml`; otherwise N/A |
 
 ## Skill contract shape
 

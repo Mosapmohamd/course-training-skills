@@ -1,0 +1,29 @@
+name: release
+
+# Push a tag like v0.2.0 to publish a GitHub Release with the
+# claude.ai upload zip attached.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build claude.ai skill package
+        run: bash scripts/build_claude_ai_skill_package.sh
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            dist/course-training-skills-CLAUDE-SKILL-UPLOAD.zip \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes
