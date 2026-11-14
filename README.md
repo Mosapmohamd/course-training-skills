@@ -41,7 +41,7 @@ courses/machine-learning-beginners/
 ├── activities/              # activities and games, each with a learning purpose
 ├── exercises/               # practical work (student version + instructor solution)
 ├── notebooks/               # student + instructor .ipynb, only when code helps
-├── slides/                  # slide content, plus an HTML slide deck that opens in any browser
+├── slides/                  # slide content, plus the deck as HTML, PowerPoint, or both (your choice)
 ├── assessments/             # every question mapped to a learning objective
 ├── instructor-guide/        # misconceptions, questions to ask, transitions, recovery plans
 └── review/                  # automated quality review of the whole package

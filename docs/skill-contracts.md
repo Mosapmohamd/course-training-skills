@@ -17,7 +17,7 @@ shape itself is documented for reuse at
 | `assessment-designer` | Assessments mapped to objectives | Per session + final | `session-designer`, `course-outline` (strategy) | 6 |
 | `instructor-guide` | Delivery guidance specific to the real session | After activities/exercise exist | `session-designer`, `activity-designer`, `practical-work` | 6 |
 | `notebook-designer` | Decide + generate real `.ipynb` when warranted | Per session, after practical work | `session-designer`, `practical-work` | 7 |
-| `slide-designer` | Slide spec (Stage 1) + self-contained HTML deck (Stage 2) | Per session, after session design | `session-designer` | 8 |
+| `slide-designer` | Slide spec (Stage 1) + deck in the chosen format: HTML, `.pptx` or both (Stage 2) | Per session, after session design | `session-designer` | 8 |
 
 ## Responsibility non-overlap check
 

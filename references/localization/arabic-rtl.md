@@ -91,7 +91,7 @@ GitHub and most viewers render markdown left-to-right unless told otherwise.
 ### Slides (HTML decks)
 
 Content rules are in `references/slides/slide-patterns.md#right-to-left-arabic-decks`.
-Stage 2 technical rules for the default HTML deck
+Stage 2 technical rules for an HTML deck
 (`references/slides/slide-patterns.md#html-deck-format`):
 
 - Set the direction once, on the root: `<html lang="ar" dir="rtl">`. Never
@@ -112,7 +112,7 @@ Stage 2 technical rules for the default HTML deck
 - `scripts/validate_course.py` fails an RTL course's deck that has Arabic
   text but no `dir="rtl"` on `<html>`.
 
-### Slides (`.pptx`, only when explicitly requested)
+### Slides (`.pptx` and native decks)
 
 - Every Arabic paragraph is an RTL paragraph: OOXML `<a:pPr rtl="1" algn="r">`.
   With pptxgenjs: `rtlMode: true, align: "right"` on every Arabic text box,

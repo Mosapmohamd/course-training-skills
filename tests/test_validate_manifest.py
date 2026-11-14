@@ -48,6 +48,16 @@ def test_valid_manifest_passes():
     assert vm.validate(base_manifest()) == []
 
 
+def test_slides_format_values():
+    for fmt in ("html", "pptx", "both"):
+        m = base_manifest()
+        m["artifacts"]["slides_format"] = fmt
+        assert vm.validate(m) == []
+    m = base_manifest()
+    m["artifacts"]["slides_format"] = "keynote"
+    assert any("slides_format" in e for e in vm.validate(m))
+
+
 def test_missing_top_level_key_detected():
     m = base_manifest()
     del m["delivery"]

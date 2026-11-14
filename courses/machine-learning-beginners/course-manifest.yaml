@@ -18,6 +18,7 @@ delivery:
 
 artifacts:
   slides: true
+  slides_format: pptx
   notebooks: auto
   assessments: true
   instructor_guide: true

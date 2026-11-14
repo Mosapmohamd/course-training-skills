@@ -20,6 +20,7 @@ delivery:
 
 artifacts:
   slides: true
+  slides_format: pptx
   notebooks: false
   assessments: true
   instructor_guide: true

@@ -61,7 +61,7 @@ the skills themselves.
   actually deterministic (arithmetic, schema/field checks, structure checks).
   Do not move instructional judgment into scripts.
 - Every generated file must be a real, valid artifact of its stated format
-  (valid YAML, valid `.ipynb` JSON, an HTML deck that opens in a browser) — never a
+  (valid YAML, valid `.ipynb` JSON, an HTML deck that opens in a browser, a real openable `.pptx`) — never a
   plain-text stand-in with the right extension.
 - Do not regenerate a whole course when only one session/artifact changed;
   follow `references/adaptation/adaptation-rules.md`.
@@ -70,9 +70,12 @@ the skills themselves.
 
 ## Slide deck format
 
-Stage 2 of `slide-designer` produces a self-contained HTML deck
-(`slides/session-NN-slides.html`), which needs no presentation tool, so it
-always runs. A `.pptx` or native deck artifact is built only when the user
-explicitly asks for one
-(`references/slides/slide-patterns.md#stage-2-targets`). The example courses
-under `courses/` still ship `.pptx` decks generated before this change.
+Stage 2 of `slide-designer` builds the deck as a self-contained HTML file,
+an editable `.pptx`, or both. The instructor chooses: the request, the
+manifest's `artifacts.slides_format`, or `config/defaults.yaml`'s
+`slides_format` decides, and when none does, the skill asks
+(`references/slides/slide-patterns.md#stage-2-targets`).
+
+Known limitation: a `.pptx` depends on a presentation/design capability
+being available in the runtime. If it is not, `slide-designer` says so and
+delivers the HTML deck instead — it must not fabricate a fake "pptx".
