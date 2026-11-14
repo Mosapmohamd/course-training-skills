@@ -79,6 +79,7 @@ delivery:
   direction: rtl|ltr       # optional; must be rtl when language is ar
 artifacts:
   slides: boolean
+  slides_format: html|pptx|both   # optional; the deck format chosen for this course
   notebooks: boolean|auto
   assessments: boolean
   instructor_guide: boolean
@@ -115,7 +116,8 @@ courses/<course-id>/
   notebooks/session-NN-student.ipynb
   notebooks/session-NN-instructor.ipynb
   slides/session-NN-slides.md          # Stage 1 spec
-  slides/session-NN-slides.html        # Stage 2 artifact (self-contained HTML deck)
+  slides/session-NN-slides.html        # Stage 2 artifact when slides_format is html or both
+  slides/session-NN-slides.pptx        # Stage 2 artifact when slides_format is pptx or both
   assessments/session-NN-assessment.md
   instructor-guide/session-NN-guide.md
   review/course-review.md

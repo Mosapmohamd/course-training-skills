@@ -103,14 +103,32 @@ Notes, Interaction`. See `templates/slide-template.md`.
 
 ## Stage 2 targets
 
-The Stage 2 output is an HTML slide deck: `slides/session-NN-slides.html`,
-built to the format below. HTML needs no presentation tool, so Stage 2
-always runs. Record the file path in the manifest's `slides:` list entry
-for the session.
+Two deck formats are available, and the instructor chooses between them:
 
-Build a `.pptx` file or a native editable slide-deck artifact (e.g. a Claude
-Slides artifact) only when the user explicitly asks for that format, and
-build it in addition to the HTML deck.
+| `slides_format` | Stage 2 output | Good for |
+|---|---|---|
+| `html` | `slides/session-NN-slides.html`, built to the HTML deck format below | Presenting from any browser, sharing a link or file, no software needed |
+| `pptx` | `slides/session-NN-slides.pptx`, a real editable PowerPoint file | Editing slides by hand in PowerPoint, Keynote or Google Slides |
+| `both` | Both files, from the same spec | Presenting in the browser while keeping an editable copy |
+
+Pick the format in this order and stop at the first that answers:
+
+1. The format the request names ("HTML slides", "a PowerPoint", "both").
+2. `artifacts.slides_format` in the course manifest.
+3. `defaults.slides_format` in `config/defaults.yaml`, when it is `html`,
+   `pptx` or `both`.
+4. Otherwise (`ask`, the shipped default): ask the instructor once,
+   offering HTML, PowerPoint, or both.
+
+Record the choice as `artifacts.slides_format` in the manifest, so it is
+asked once per course and every later session uses the same format. Record
+each generated file path in the manifest's `slides:` list entry.
+
+A `.pptx` needs a presentation/design capability in the runtime. If `pptx`
+or `both` was chosen and none is available, say so plainly, build the HTML
+deck instead, and never fabricate a `.pptx`. A native editable deck
+artifact (e.g. a Claude Slides artifact) counts as the `pptx` target when
+the instructor asks for one.
 
 ## HTML deck format
 
@@ -143,5 +161,6 @@ build it in addition to the HTML deck.
 
 Stage 1 output (the spec) is the only input Stage 2 may use for instructional
 content. Stage 2 may not invent new content, only design how the specified
-content is presented. Never hand off a deck that has not passed
+content is presented. Both formats are built from the same spec, so their
+slides match one for one. Never hand off a deck that has not passed
 `scripts/validate_course.py`.

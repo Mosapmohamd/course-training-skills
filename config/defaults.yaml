@@ -5,6 +5,7 @@ defaults:
   research: false
   generate_notebook_when_useful: true
   generate_slides: true
+  slides_format: ask           # ask | html | pptx | both (rules: references/slides/slide-patterns.md#stage-2-targets)
   create_instructor_notes: true
   include_assessments: true
   workflow_mode: interactive   # interactive | full

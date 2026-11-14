@@ -22,6 +22,7 @@ REQUIRED_COURSE_FIELDS = ["id", "name", "audience", "level"]
 REQUIRED_SCHEDULE_FIELDS = ["total_hours", "sessions", "session_duration"]
 REQUIRED_DELIVERY_FIELDS = ["mode"]
 REQUIRED_ARTIFACT_FIELDS = ["slides", "notebooks", "assessments", "instructor_guide"]
+VALID_SLIDE_FORMATS = ["html", "pptx", "both"]
 VALID_LEVELS = {"Beginner", "Intermediate", "Advanced"}
 VALID_MODES = {"offline", "online", "hybrid"}
 VALID_LANGUAGES = {"ar", "en"}
@@ -101,6 +102,10 @@ def validate(manifest: dict) -> list:
     for f in REQUIRED_ARTIFACT_FIELDS:
         if f not in artifacts:
             errors.append(f"artifacts.{f} is required")
+    if "slides_format" in artifacts and artifacts["slides_format"] not in VALID_SLIDE_FORMATS:
+        errors.append(
+            f"artifacts.slides_format must be one of {VALID_SLIDE_FORMATS}, got {artifacts['slides_format']!r}"
+        )
 
     research = manifest["research"]
     if "enabled" not in research:

@@ -66,6 +66,12 @@ request) and record `delivery.language` and `delivery.direction` in the
 manifest in Step 3, so every downstream skill writes in that language and
 direction.
 
+**Slide deck format (same step):** when slides are in scope, resolve the
+deck format per `references/slides/slide-patterns.md#stage-2-targets`. If
+neither the request nor `config/defaults.yaml` sets it, this is one of the
+questions worth asking: ask once, offering HTML, PowerPoint, or both, and
+record the answer as `artifacts.slides_format` in the manifest in Step 3.
+
 **Instructor profile check (same step):** if `config/instructor-profile.md`
 (or its `.local` override, per the root `SKILL.md`) still has `{{...}}`
 placeholders for name or titles, mention it once in your first reply: the
