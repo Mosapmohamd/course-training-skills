@@ -2,7 +2,7 @@ name: release
 
 # Publishes a GitHub Release with the claude.ai upload zip attached.
 # Two ways to run it:
-#   - push a tag like v0.2.0
+#   - push a tag like v0.3.0
 #   - Actions tab → "release" → "Run workflow" (creates the tag from
 #     the version in .claude-plugin/plugin.json unless you type one)
 on:
@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Tag to create, e.g. v0.2.0 (leave empty to use plugin.json's version)"
+        description: "Tag to create, e.g. v0.3.0 (leave empty to use plugin.json's version)"
         required: false
         default: ""
 

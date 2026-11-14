@@ -1,6 +1,6 @@
 {
   "name": "course-training-skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Modular Claude Skills toolkit for designing complete training courses from course requirements to instructor-ready materials.",
   "author": {
     "name": "Mosap Abdel-Ghany",
