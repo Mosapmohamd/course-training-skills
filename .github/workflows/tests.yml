@@ -27,7 +27,7 @@ jobs:
       - name: Validate example course manifest
         run: python3 scripts/validate_manifest.py courses/machine-learning-beginners/course-manifest.yaml
 
-      - name: Validate example course artifacts (agenda timing, notebook/pptx validity)
+      - name: Validate example course artifacts (agenda timing, notebook/slide-deck validity)
         run: python3 scripts/validate_course.py courses/machine-learning-beginners/
 
       - name: Validate Arabic example course (manifest, timing, RTL)

@@ -115,7 +115,7 @@ courses/<course-id>/
   notebooks/session-NN-student.ipynb
   notebooks/session-NN-instructor.ipynb
   slides/session-NN-slides.md          # Stage 1 spec
-  slides/session-NN-slides.pptx        # Stage 2 artifact (if capability available)
+  slides/session-NN-slides.html        # Stage 2 artifact (self-contained HTML deck)
   assessments/session-NN-assessment.md
   instructor-guide/session-NN-guide.md
   review/course-review.md

@@ -562,7 +562,7 @@ The slide skill is responsible for instructional content.
 
 The presentation/design capability is responsible for visual design.
 
-The result must be an actual editable `.pptx`.
+The result must be an actual self-contained HTML deck (`.html`) that opens in a browser; a `.pptx` only on explicit request.
 
 Do not flatten the entire presentation into images.
 
@@ -1146,7 +1146,7 @@ Supported formats:
 ```text
 Markdown → .md
 Notebook → .ipynb
-Presentation → .pptx
+Presentation → .html
 Configuration → .yaml
 ```
 

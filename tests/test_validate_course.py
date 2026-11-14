@@ -1,6 +1,6 @@
 """
 Tests for scripts/validate_course.py — agenda timing, notebook JSON
-validity, and pptx structural validity (docs/specification.md §35: "Agenda timing",
+validity, and slide-deck (HTML, pptx) structural validity (docs/specification.md §35: "Agenda timing",
 "Output structure").
 """
 import json
@@ -142,6 +142,58 @@ def test_pptx_not_a_zip_detected(tmp_path):
         f.write("not a zip file")
     errors = vc.validate_pptx(path)
     assert any("not a valid zip" in e for e in errors)
+
+
+DECK = (
+    '<!DOCTYPE html><html lang="{lang}"{dir}><head><style>.slide{{}}</style></head><body>'
+    "{slides}<script>var n = 1;</script></body></html>"
+)
+
+
+def _deck(tmp_path, name, slides, lang="en", direction="", extra=""):
+    body = "".join(f'<section class="slide"><h1>{s}</h1></section>' for s in slides) + extra
+    d = f' dir="{direction}"' if direction else ""
+    return write(str(tmp_path), name, DECK.format(lang=lang, dir=d, slides=body))
+
+
+def test_valid_html_deck_passes(tmp_path):
+    path = _deck(tmp_path, "deck.html", ["One", "Two"])
+    assert vc.validate_html_deck(path) == []
+    assert vc.validate_html_deck(path, expected_slides=2) == []
+
+
+def test_html_deck_slide_count_mismatch_detected(tmp_path):
+    path = _deck(tmp_path, "deck.html", ["One", "Two"])
+    errors = vc.validate_html_deck(path, expected_slides=3)
+    assert any("spec has 3" in e for e in errors)
+
+
+def test_html_deck_without_slides_detected(tmp_path):
+    path = write(str(tmp_path), "deck.html", "<html><body><p>hi</p></body></html>")
+    assert any("no <section" in e for e in vc.validate_html_deck(path))
+    plain = write(str(tmp_path), "plain.html", "just text")
+    assert any("no <html>" in e for e in vc.validate_html_deck(plain))
+
+
+def test_html_deck_external_assets_detected(tmp_path):
+    extra = '<script src="https://cdn.example/x.js"></script><link rel="stylesheet" href="a.css">'
+    path = _deck(tmp_path, "deck.html", ["One"], extra=extra)
+    errors = vc.validate_html_deck(path)
+    assert len([e for e in errors if "self-contained" in e]) == 2
+
+
+def test_count_spec_slides(tmp_path):
+    spec = write(str(tmp_path), "s.md", "# Spec\n\n## Slide 1: A\n\n- x\n\n## Slide 2: B\n")
+    assert vc.count_spec_slides(spec) == 2
+
+
+def test_rtl_html_deck_requires_dir(tmp_path):
+    good = _deck(tmp_path, "g.html", ["مرحبا"], lang="ar", direction="rtl")
+    bad = _deck(tmp_path, "b.html", ["مرحبا"], lang="ar")
+    english = _deck(tmp_path, "e.html", ["Hello"])
+    assert vc.validate_rtl_html_deck(good) == []
+    assert vc.validate_rtl_html_deck(bad)
+    assert vc.validate_rtl_html_deck(english) == []
 
 
 def test_parse_minutes():
