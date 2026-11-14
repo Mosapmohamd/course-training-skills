@@ -88,10 +88,31 @@ GitHub and most viewers render markdown left-to-right unless told otherwise.
 - Code cells, code comments, variable names and printed output stay English
   and LTR. Explain in the markdown cell above, in Arabic.
 
-### Slides (`.pptx` and native decks)
+### Slides (HTML decks)
 
 Content rules are in `references/slides/slide-patterns.md#right-to-left-arabic-decks`.
-Stage 2 technical rules:
+Stage 2 technical rules for the default HTML deck
+(`references/slides/slide-patterns.md#html-deck-format`):
+
+- Set the direction once, on the root: `<html lang="ar" dir="rtl">`. Never
+  rely on `text-align: right` alone; it does not fix word order.
+- Pure-English blocks (code, URLs, sample English sentences) get
+  `dir="ltr"` and stay left-aligned. Wrap an English term inside an Arabic
+  sentence in `<bdi>` when it sits next to digits or punctuation.
+- Use CSS logical properties (`margin-inline-start`, `padding-inline-end`,
+  `inset-inline-start`, `text-align: start`) so the layout mirrors with the
+  direction. Flex and grid rows then run right → left on their own; do not
+  also reverse them.
+- Keyboard navigation follows reading direction: ← goes to the next slide
+  and → to the previous one. "Next" arrows drawn on slides point left (`←`).
+- Slide counter bottom-left, footer text bottom-right.
+- Font stack starts with `config/presentation-style.md`'s Arabic fonts and
+  ends with Arabic-capable system fonts (`"Segoe UI", Tahoma, Arial,
+  sans-serif`), so the deck renders without installing anything.
+- `scripts/validate_course.py` fails an RTL course's deck that has Arabic
+  text but no `dir="rtl"` on `<html>`.
+
+### Slides (`.pptx`, only when explicitly requested)
 
 - Every Arabic paragraph is an RTL paragraph: OOXML `<a:pPr rtl="1" algn="r">`.
   With pptxgenjs: `rtlMode: true, align: "right"` on every Arabic text box,

@@ -61,19 +61,18 @@ the skills themselves.
   actually deterministic (arithmetic, schema/field checks, structure checks).
   Do not move instructional judgment into scripts.
 - Every generated file must be a real, valid artifact of its stated format
-  (valid YAML, valid `.ipynb` JSON, a real openable `.pptx`) — never a
+  (valid YAML, valid `.ipynb` JSON, an HTML deck that opens in a browser) — never a
   plain-text stand-in with the right extension.
 - Do not regenerate a whole course when only one session/artifact changed;
   follow `references/adaptation/adaptation-rules.md`.
 - Research (web lookups) is off by default; see
   `references/instructional-design/course-architecture.md#research-policy`.
 
-## Known limitation
+## Slide deck format
 
-Stage 2 of `slide-designer` (turning a slide specification into an actual
-editable `.pptx`) depends on a presentation/design capability being available
-in the runtime (e.g. a document/slide-authoring tool). If that capability is
-not available, `slide-designer` must stop after Stage 1 (the specification)
-and say so — it must not fabricate a fake "pptx". A native editable deck
-artifact (e.g. Claude Slides) counts as a valid Stage 2 target
-(`references/slides/slide-patterns.md#stage-2-targets`).
+Stage 2 of `slide-designer` produces a self-contained HTML deck
+(`slides/session-NN-slides.html`), which needs no presentation tool, so it
+always runs. A `.pptx` or native deck artifact is built only when the user
+explicitly asks for one
+(`references/slides/slide-patterns.md#stage-2-targets`). The example courses
+under `courses/` still ship `.pptx` decks generated before this change.

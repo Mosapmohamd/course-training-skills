@@ -1,14 +1,13 @@
 ---
 name: slide-designer
-description: Two-stage skill. Stage 1 produces an instructional slide specification (per-slide title, purpose, content, visual recommendation, speaker notes, interaction) matching the session's actual content. Stage 2 uses an available presentation/design capability to generate a real, editable .pptx — never a flattened image deck, and never fabricated if no such capability is available.
+description: Two-stage skill. Stage 1 produces an instructional slide specification (per-slide title, purpose, content, visual recommendation, speaker notes, interaction) matching the session's actual content. Stage 2 builds a real, self-contained HTML slide deck (one .html file per session) from that spec — never a flattened image deck. A .pptx is built only when the user explicitly asks for one.
 ---
 
 # slide-designer
 
 ## Purpose
-Specify what each slide teaches (Stage 1), then, only if a real
-presentation/design capability exists in the current runtime, produce an
-actually editable `.pptx` from that spec (Stage 2).
+Specify what each slide teaches (Stage 1), then build a self-contained
+HTML slide deck from that spec (Stage 2).
 
 ## Trigger
 `course-designer` invokes per session after `session-designer` (and usually
@@ -18,9 +17,8 @@ after activities/exercise, since slides may reference them) completes.
 ## Non-trigger conditions
 - Do not design session content here — pull it from `session-designer`'s
   Topics/Explanation, don't invent new content at slide time.
-- Do not attempt Stage 2 if no presentation/design capability is available in
-  the current environment — stop after Stage 1 and say so plainly
-  (`CLAUDE.md`'s "Known limitation").
+- Do not produce a `.pptx` or a native slide-deck artifact unless the user
+  explicitly asks for that format; the default Stage 2 output is HTML.
 
 ## Inputs
 This session's Topics, Key Concepts, Examples (`session-designer`);
@@ -32,18 +30,19 @@ For each config file, read its `.local` variant instead when one exists
 
 ## Outputs
 Stage 1: `slides/session-NN-slides.md`, one entry per
-`templates/slide-template.md`. Stage 2 (capability permitting):
-`slides/session-NN-slides.pptx`, or a native editable slide-deck artifact
-when the runtime offers one (`slide-patterns.md#stage-2-targets`) — real,
-editable text/shapes/diagrams/tables/charts/code blocks where the tool
-supports them; images may remain images.
+`templates/slide-template.md`. Stage 2:
+`slides/session-NN-slides.html` — one self-contained HTML file built to
+`slide-patterns.md#html-deck-format`, with live text, tables, code blocks
+and diagrams; images may remain images. Only on explicit request: a
+`.pptx` or native deck (`slide-patterns.md#stage-2-targets`).
 
 ## Dependencies
 `session-designer` (required); `activity-designer`, `practical-work`
 (referenced, not required — slides can be drafted before them and revised).
 
 ## References
-`references/slides/slide-patterns.md` (Stage 1),
+`references/slides/slide-patterns.md` (Stage 1, and the HTML deck format
+for Stage 2),
 `config/presentation-style.md` (Stage 2, visual design only — never
 instructional content).
 
@@ -78,24 +77,27 @@ instructional content).
    `slide-patterns.md#activity-slides`.
 8. If the manifest says `delivery.direction: rtl`, write the spec in Arabic
    and apply `slide-patterns.md#right-to-left-arabic-decks` plus
-   `references/localization/arabic-rtl.md` §5 (Slides) in Stage 2: every
-   Arabic paragraph RTL and right-aligned, mirrored layout, Arabic-capable
-   fonts.
+   `references/localization/arabic-rtl.md` §5 (Slides) in Stage 2:
+   `<html lang="ar" dir="rtl">`, mirrored layout, Arabic-capable fonts.
 
-### Stage 2 — presentation generation
-1. Check whether a presentation/design capability is available in this
-   runtime. If not: stop, and clearly state the limitation — Stage 1's spec
-   is still delivered as complete and usable on its own.
-2. If available: feed Stage 1's spec as the only source of instructional
-   content. Apply visual design (typography, color, spacing, layout,
-   diagram/code/chart style) from `config/presentation-style.md`.
-3. Build the deck with real, editable elements — text boxes, shapes,
-   tables, charts, code blocks — never a full-slide screenshot/image
-   standing in for the whole slide. Photographic/illustrative images may
-   remain images.
-4. Validate the resulting file is a structurally valid `.pptx`
-   (`scripts/validate_course.py`) before calling it done. For a native deck
-   artifact, record its link in the manifest's `slides:` entry instead.
+### Stage 2 — HTML deck generation
+1. Feed Stage 1's spec as the only source of instructional content. Apply
+   visual design (typography, color, spacing, layout, diagram/code/chart
+   style) from `config/presentation-style.md`.
+2. Write `slides/session-NN-slides.html` to
+   `slide-patterns.md#html-deck-format`: one file, one
+   `<section class="slide">` per spec slide in spec order, inline CSS and
+   JavaScript, keyboard/click navigation, speaker notes, print stylesheet.
+3. Build every slide from real elements — live text, `<table>`,
+   `<pre><code>`, inline SVG or HTML/CSS diagrams — never a full-slide
+   screenshot/image standing in for the whole slide. Photographic/
+   illustrative images may remain images.
+4. Validate with `python3 scripts/validate_course.py courses/<course-id>/`
+   (parses the deck, checks it is self-contained, and compares its slide
+   count to the spec) before calling it done. Record the file path in the
+   manifest's `slides:` entry.
+5. If the user explicitly asked for a `.pptx` or a native deck, build it
+   as well, per `slide-patterns.md#stage-2-targets`.
 
 ## Validation
 - [ ] Every slide's content traces to this session's actual Topics/Explanation
@@ -103,5 +105,6 @@ instructional content).
 - [ ] Deck frame present: Trainer Intro second, Contact penultimate,
       Closing "Thank You" last
 - [ ] Every activity in the session's activities file has its own slide
-- [ ] Stage 2 either produced a real editable `.pptx`, verified valid, or was
-      explicitly skipped with the limitation stated — never a fabricated file
+- [ ] Stage 2 produced `slides/session-NN-slides.html`: self-contained, one
+      `<section class="slide">` per spec slide, passing
+      `scripts/validate_course.py`

@@ -3,10 +3,12 @@
 Validate a generated course directory for structural correctness:
 - agenda timing sums exactly to session_duration
 - notebooks are valid nbformat 4 JSON with required cell fields
+- HTML slide decks are parseable, self-contained (no external scripts or
+  stylesheets) and have one <section class="slide"> per slide in the spec
 - pptx files (if present) are valid zip/OOXML packages with a slide part
 - required session fields are present
 - for right-to-left courses (manifest delivery.direction: rtl): markdown
-  bodies, notebook markdown cells, slide paragraphs and spreadsheets are
+  bodies, notebook markdown cells, slide decks and spreadsheets are
   right-to-left (references/localization/arabic-rtl.md)
 
 Usage:
@@ -18,6 +20,7 @@ import re
 import json
 import zipfile
 import glob
+from html.parser import HTMLParser
 
 try:
     import yaml
@@ -149,6 +152,89 @@ def validate_rtl_xlsx(path):
     return errors
 
 
+class _DeckParser(HTMLParser):
+    """Collects what validate_html_deck needs from one pass over the file."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.has_html = False
+        self.html_dir = None
+        self.slides = 0
+        self.external = []
+        self.text = []
+        self._skip = 0  # depth inside <script>/<style>
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag == "html":
+            self.has_html = True
+            self.html_dir = (a.get("dir") or "").lower() or None
+        elif tag == "section" and "slide" in (a.get("class") or "").split():
+            self.slides += 1
+        elif tag == "script":
+            if a.get("src"):
+                self.external.append(f'<script src="{a["src"]}">')
+            self._skip += 1
+        elif tag == "style":
+            self._skip += 1
+        elif tag == "link" and "stylesheet" in (a.get("rel") or "").lower().split():
+            self.external.append(f'<link rel="stylesheet" href="{a.get("href")}">')
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style") and self._skip:
+            self._skip -= 1
+
+    def handle_data(self, data):
+        if not self._skip:
+            self.text.append(data)
+
+
+def count_spec_slides(spec_path):
+    """Number of slides in a Stage 1 spec: one level-2 heading per slide."""
+    with open(spec_path, encoding="utf-8") as f:
+        return len(re.findall(r"^## ", f.read(), re.MULTILINE))
+
+
+def _parse_deck(path):
+    parser = _DeckParser()
+    with open(path, encoding="utf-8") as f:
+        parser.feed(f.read())
+    parser.close()
+    return parser
+
+
+def validate_html_deck(path, expected_slides=None):
+    """A Stage 2 deck is one self-contained HTML file with one
+    <section class="slide"> per slide (references/slides/slide-patterns.md)."""
+    try:
+        deck = _parse_deck(path)
+    except Exception as e:
+        return [f"{path}: not readable as HTML ({e})"]
+    errors = []
+    if not deck.has_html:
+        errors.append(f"{path}: no <html> element — not an HTML document")
+    if deck.slides == 0:
+        errors.append(f'{path}: no <section class="slide"> elements found')
+    elif expected_slides is not None and deck.slides != expected_slides:
+        errors.append(
+            f"{path}: deck has {deck.slides} slide(s), spec has {expected_slides}"
+        )
+    for ref in deck.external:
+        errors.append(f"{path}: not self-contained, loads {ref}")
+    return errors
+
+
+def validate_rtl_html_deck(path):
+    """An Arabic deck must set dir="rtl" on its <html> element."""
+    try:
+        deck = _parse_deck(path)
+    except Exception:
+        return []  # reported by validate_html_deck
+    if ARABIC.search("".join(deck.text)) and deck.html_dir != "rtl":
+        return [f'{path}: Arabic deck without dir="rtl" on <html>']
+    return []
+
+
 def validate_pptx(path):
     errors = []
     if not zipfile.is_zipfile(path):
@@ -195,6 +281,12 @@ def main(argv):
     for nb in sorted(glob.glob(os.path.join(course_dir, "notebooks", "*.ipynb"))):
         errors.extend(validate_notebook(nb))
 
+    decks = sorted(glob.glob(os.path.join(course_dir, "slides", "*.html")))
+    for deck in decks:
+        spec = os.path.splitext(deck)[0] + ".md"
+        expected = count_spec_slides(spec) if os.path.isfile(spec) else None
+        errors.extend(validate_html_deck(deck, expected))
+
     for pptx in sorted(glob.glob(os.path.join(course_dir, "slides", "*.pptx"))):
         errors.extend(validate_pptx(pptx))
 
@@ -203,6 +295,8 @@ def main(argv):
             errors.extend(validate_rtl_markdown(md))
         for nb in sorted(glob.glob(os.path.join(course_dir, "notebooks", "*.ipynb"))):
             errors.extend(validate_rtl_notebook(nb))
+        for deck in decks:
+            errors.extend(validate_rtl_html_deck(deck))
         for pptx in sorted(glob.glob(os.path.join(course_dir, "slides", "*.pptx"))):
             errors.extend(validate_rtl_pptx(pptx))
         for xlsx in sorted(glob.glob(os.path.join(course_dir, "**", "*.xlsx"), recursive=True)):

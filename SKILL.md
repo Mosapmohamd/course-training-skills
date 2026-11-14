@@ -25,7 +25,7 @@ course is adapted. Full input/output model: `docs/specification.md`.
 | `activity-designer` | Learning activities & training games with a stated purpose | Practical/graded exercises |
 | `practical-work` | Practical exercises (student + instructor versions) | Notebooks, activities |
 | `notebook-designer` | Deciding if a notebook helps, and generating real `.ipynb` files | Slide decks |
-| `slide-designer` | Slide specification (Stage 1) and real editable `.pptx` generation (Stage 2) | Session content design |
+| `slide-designer` | Slide specification (Stage 1) and a self-contained HTML slide deck (Stage 2) | Session content design |
 | `assessment-designer` | Assessments mapped to objectives | Practical exercises (unless the format is an assessed practical) |
 | `instructor-guide` | Delivery guidance per session (misconceptions, interventions, transitions) | Student-facing content |
 | `course-reviewer` | Cross-artifact QA, contradiction detection, fixing when possible | Original content generation |
@@ -59,7 +59,7 @@ in the Arabic variety set in `config/defaults.yaml`. Follow
 - Never build this as one giant skill — always delegate to the specific skill above.
 - Never regenerate the whole course for a small change; use the dependency
   chain in `references/adaptation/adaptation-rules.md`.
-- Never claim an artifact (`.ipynb`, `.pptx`, `.yaml`) works without validating it
+- Never claim an artifact (`.ipynb`, `.html` slide deck, `.yaml`) works without validating it
   (`scripts/`, `tests/`).
 - Never ask a clarifying question the system could reasonably infer.
 - Present every package as a draft for the instructor to review before

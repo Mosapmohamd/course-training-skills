@@ -65,8 +65,9 @@ not on the slide.
 Full cross-format rules (dialect, numbers, bidi, fonts): `references/localization/arabic-rtl.md`.
 
 
-- Align text right and lay rows out right-to-left (reverse flex rows; in
-  grids, place the first item in the right-hand cell).
+- Align text right and lay rows out right-to-left, with the first item on
+  the right. In an HTML deck `dir="rtl"` on the root does this by itself;
+  in a tool with no direction support, reverse the row order by hand.
 - Arabic text that contains English terms renders in the wrong word order
   when the paragraph's base direction is left-to-right. If the tool has no
   `dir`/`direction` support, wrap each Arabic paragraph in U+202B (RLE) …
@@ -102,16 +103,45 @@ Notes, Interaction`. See `templates/slide-template.md`.
 
 ## Stage 2 targets
 
-Any real, editable presentation format counts as Stage 2 output: a `.pptx`
-file, or a native editable slide-deck artifact when the runtime offers one
-(e.g. a Claude Slides artifact, which also exports to `.pptx`/PDF). Prefer
-the native deck when available and the user hasn't asked for a file format;
-record which target was used (file path or deck link) in the manifest's
-`slides:` list entry for the session.
+The Stage 2 output is an HTML slide deck: `slides/session-NN-slides.html`,
+built to the format below. HTML needs no presentation tool, so Stage 2
+always runs. Record the file path in the manifest's `slides:` list entry
+for the session.
+
+Build a `.pptx` file or a native editable slide-deck artifact (e.g. a Claude
+Slides artifact) only when the user explicitly asks for that format, and
+build it in addition to the HTML deck.
+
+## HTML deck format
+
+- **One file.** All CSS and JavaScript are inline: no `<script src>`, no
+  `<link rel="stylesheet">`, no build step. The deck opens by double-click
+  in any browser and works offline.
+- **One `<section class="slide">` per spec slide**, in spec order, so the
+  section count equals the number of `## Slide N` entries in
+  `slides/session-NN-slides.md`.
+- **16:9 stage.** Each slide is a fixed 1280×720 box scaled to fit the
+  window; content never scrolls or overflows the box. Split a slide in the
+  spec rather than shrinking text below a readable size.
+- **Navigation.** Next/previous with →/←, Space, PageDown/PageUp and
+  click or tap; Home/End jump to the first/last slide; `F` toggles
+  fullscreen; a slide counter shows `n / total`; the current slide is kept
+  in the URL hash so a refresh stays on it.
+- **Real elements.** Text is live HTML text, tables are `<table>`, code is
+  `<pre><code>`, diagrams are inline SVG or HTML/CSS. Never a screenshot
+  standing in for a whole slide.
+- **Speaker notes.** Each slide carries the spec's Speaker Notes in
+  `<aside class="notes">`, hidden by default and toggled with `N`.
+- **Visual design** comes from `config/presentation-style.md`, declared
+  once as CSS custom properties. Use a font stack that ends in common system
+  fonts, so the deck still renders if a named font is not installed.
+- **Print.** An `@media print` stylesheet puts one slide per landscape
+  page with notes hidden, so Print → Save as PDF gives a handout.
+- **Right-to-left decks:** `references/localization/arabic-rtl.md` §5.
 
 ## Stage 2 handoff contract
 
 Stage 1 output (the spec) is the only input Stage 2 may use for instructional
 content. Stage 2 may not invent new content, only design how the specified
-content is presented. If the presentation/design capability is unavailable,
-stop after Stage 1 and say so plainly — do not fabricate a `.pptx`.
+content is presented. Never hand off a deck that has not passed
+`scripts/validate_course.py`.
