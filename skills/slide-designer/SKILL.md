@@ -42,13 +42,15 @@ diagrams in either format; images may remain images.
 (referenced, not required — slides can be drafted before them and revised).
 
 ## References
-`references/slides/slide-patterns.md` (Stage 1; format choice and the
-HTML deck format for Stage 2),
+`references/slides/slide-patterns.md` (Stage 1; format choice for Stage 2),
+`references/slides/html-deck.md` (HTML decks: the engine, and how topics
+and examples are presented),
 `config/presentation-style.md` (Stage 2, visual design only — never
 instructional content).
 
 ## Templates
-`templates/slide-template.md`
+`templates/slide-template.md`, `templates/html-deck-shell.html` (the engine
+every HTML deck starts from)
 
 ## Downstream consumers
 `course-reviewer` (Slide alignment check); the instructor (delivery).
@@ -82,6 +84,13 @@ instructional content).
    Arabic paragraph RTL and right-aligned, mirrored layout, Arabic-capable
    fonts, by the HTML or `.pptx` rules for the chosen format.
 
+9. When the deck format is `html` or `both` (resolve it now, per Stage 2
+   step 1), plan the body with `html-deck.md` Part 2: one running example,
+   parts with bridge dividers, the topic sequence for each technique, and a
+   try-it element wherever the learner can test the idea. Record each
+   slide's ordered reveals in Reveal Steps and its try-it element in
+   Interaction.
+
 ### Stage 2 — deck generation
 1. Resolve the deck format (`html`, `pptx` or `both`) in the order given in
    `slide-patterns.md#stage-2-targets`: the request, then the manifest's
@@ -91,10 +100,12 @@ instructional content).
 2. Feed Stage 1's spec as the only source of instructional content. Apply
    visual design (typography, color, spacing, layout, diagram/code/chart
    style) from `config/presentation-style.md`.
-3. For `html` or `both`: write `slides/session-NN-slides.html` to
-   `slide-patterns.md#html-deck-format` — one file, one
-   `<section class="slide">` per spec slide in spec order, inline CSS and
-   JavaScript, keyboard/click navigation, speaker notes, print stylesheet.
+3. For `html` or `both`: copy `templates/html-deck-shell.html` to
+   `slides/session-NN-slides.html`, keep its engine unchanged, fill its
+   tokens from `config/presentation-style.md`, and replace the sample slides
+   with one `<section class="slide" data-title="…">` per spec slide in spec
+   order, built from the components in `html-deck.md` Part 1. Run every
+   code cell's code and store its real output in `data-out`.
 4. For `pptx` or `both`: build `slides/session-NN-slides.pptx` with real,
    editable text boxes, shapes, tables, charts and code blocks. If no
    presentation/design capability is available, say so plainly and deliver
@@ -113,5 +124,7 @@ instructional content).
 - [ ] Every activity in the session's activities file has its own slide
 - [ ] Deck format came from the request, the manifest or config, or the
       instructor was asked — never assumed
+- [ ] HTML deck: built on the shell's engine, reveal steps match the spec,
+      every code cell's saved output came from running the code
 - [ ] Stage 2 produced the chosen format(s), passing
       `scripts/validate_course.py` — never a fabricated file

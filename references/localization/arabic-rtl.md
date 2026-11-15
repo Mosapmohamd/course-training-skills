@@ -104,7 +104,9 @@ Stage 2 technical rules for an HTML deck
   direction. Flex and grid rows then run right → left on their own; do not
   also reverse them.
 - Keyboard navigation follows reading direction: ← goes to the next slide
-  and → to the previous one. "Next" arrows drawn on slides point left (`←`).
+  and → to the previous one (the shell's engine does this from `dir`).
+- Code cells, code output and formulas stay `dir="ltr"`; an English sample
+  inside an Arabic slide gets `dir="ltr"` on its own element. "Next" arrows drawn on slides point left (`←`).
 - Slide counter bottom-left, footer text bottom-right.
 - Font stack starts with `config/presentation-style.md`'s Arabic fonts and
   ends with Arabic-capable system fonts (`"Segoe UI", Tahoma, Arial,

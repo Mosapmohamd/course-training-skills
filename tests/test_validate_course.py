@@ -151,7 +151,7 @@ DECK = (
 
 
 def _deck(tmp_path, name, slides, lang="en", direction="", extra=""):
-    body = "".join(f'<section class="slide"><h1>{s}</h1></section>' for s in slides) + extra
+    body = "".join(f'<section class="slide" data-title="{s}"><h1>{s}</h1></section>' for s in slides) + extra
     d = f' dir="{direction}"' if direction else ""
     return write(str(tmp_path), name, DECK.format(lang=lang, dir=d, slides=body))
 
@@ -180,6 +180,32 @@ def test_html_deck_external_assets_detected(tmp_path):
     path = _deck(tmp_path, "deck.html", ["One"], extra=extra)
     errors = vc.validate_html_deck(path)
     assert len([e for e in errors if "self-contained" in e]) == 2
+
+
+def _one_slide(tmp_path, attrs, inner):
+    html = f'<html><body><section class="slide" {attrs}>{inner}</section></body></html>'
+    return vc.validate_html_deck(write(str(tmp_path), "deck.html", html))
+
+
+def test_html_deck_requires_slide_title(tmp_path):
+    assert any("data-title" in e for e in _one_slide(tmp_path, "", "<h1>x</h1>"))
+
+
+def test_html_deck_reveal_steps(tmp_path):
+    st = '<div class="st card" data-st="1">a</div><div class="st" data-st="2">b</div>'
+    assert _one_slide(tmp_path, 'data-title="T" data-steps="2"', st) == []
+    # nested <section> inside a slide is not a second slide and keeps its steps
+    nested = '<section><div class="st" data-st="1">a</div></section><div class="st" data-st="2">b</div>'
+    assert _one_slide(tmp_path, 'data-title="T" data-steps="2"', nested) == []
+    assert any("never appear" in e for e in _one_slide(tmp_path, 'data-title="T"', st))
+    assert any("highest data-st is 2" in e for e in _one_slide(tmp_path, 'data-title="T" data-steps="3"', st))
+    assert any("no .st elements" in e for e in _one_slide(tmp_path, 'data-title="T" data-steps="2"', "<p>x</p>"))
+    assert any("valid data-st" in e for e in _one_slide(tmp_path, 'data-title="T" data-steps="1"', '<div class="st">a</div>'))
+
+
+def test_deck_shell_template_is_a_valid_deck():
+    shell = os.path.join(os.path.dirname(__file__), "..", "templates", "html-deck-shell.html")
+    assert vc.validate_html_deck(shell) == []
 
 
 def test_count_spec_slides(tmp_path):

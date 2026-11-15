@@ -160,6 +160,8 @@ class _DeckParser(HTMLParser):
         self.has_html = False
         self.html_dir = None
         self.slides = 0
+        self.slide_info = []  # per slide: title, declared steps, data-st values
+        self._depth = None    # <section> nesting depth inside the current slide
         self.external = []
         self.text = []
         self._skip = 0  # depth inside <script>/<style>
@@ -169,20 +171,31 @@ class _DeckParser(HTMLParser):
         if tag == "html":
             self.has_html = True
             self.html_dir = (a.get("dir") or "").lower() or None
-        elif tag == "section" and "slide" in (a.get("class") or "").split():
-            self.slides += 1
+        elif tag == "section":
+            if self._depth is not None:
+                self._depth += 1
+            elif "slide" in (a.get("class") or "").split():
+                self.slides += 1
+                self._depth = 0
+                self.slide_info.append(
+                    {"title": (a.get("data-title") or "").strip(), "steps": a.get("data-steps"), "st": []}
+                )
         elif tag == "script":
             if a.get("src"):
                 self.external.append(f'<script src="{a["src"]}">')
             self._skip += 1
         elif tag == "style":
             self._skip += 1
-        elif tag == "link" and "stylesheet" in (a.get("rel") or "").lower().split():
+        if self._depth is not None and "st" in (a.get("class") or "").split():
+            self.slide_info[-1]["st"].append(a.get("data-st"))
+        if tag == "link" and "stylesheet" in (a.get("rel") or "").lower().split():
             self.external.append(f'<link rel="stylesheet" href="{a.get("href")}">')
 
     def handle_endtag(self, tag):
         if tag in ("script", "style") and self._skip:
             self._skip -= 1
+        elif tag == "section" and self._depth is not None:
+            self._depth = None if self._depth == 0 else self._depth - 1
 
     def handle_data(self, data):
         if not self._skip:
@@ -221,6 +234,37 @@ def validate_html_deck(path, expected_slides=None):
         )
     for ref in deck.external:
         errors.append(f"{path}: not self-contained, loads {ref}")
+    for n, info in enumerate(deck.slide_info, 1):
+        errors.extend(_check_slide_steps(path, n, info))
+    return errors
+
+
+def _check_slide_steps(path, n, info):
+    """Engine contract (references/slides/html-deck.md): every slide has a
+    data-title, and its reveal steps are consistent — a .st element on a slide
+    without data-steps would stay hidden forever."""
+    errors = []
+    where = f"{path}: slide {n}"
+    if not info["title"]:
+        errors.append(f"{where} has no data-title (the overview lists slides by it)")
+    values = []
+    for raw in info["st"]:
+        if raw is None or not raw.isdigit() or int(raw) < 1:
+            errors.append(f'{where} has a .st element without a valid data-st="n"')
+        else:
+            values.append(int(raw))
+    if info["steps"] is None:
+        if info["st"]:
+            errors.append(f"{where} has .st reveal elements but no data-steps, so they never appear")
+        return errors
+    if not info["steps"].isdigit() or int(info["steps"]) < 1:
+        errors.append(f"{where} has an invalid data-steps={info['steps']!r}")
+    elif not values:
+        errors.append(f"{where} declares data-steps={info['steps']} but has no .st elements")
+    elif max(values) != int(info["steps"]):
+        errors.append(
+            f"{where} declares data-steps={info['steps']} but its highest data-st is {max(values)}"
+        )
     return errors
 
 
