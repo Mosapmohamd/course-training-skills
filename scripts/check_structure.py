@@ -27,6 +27,7 @@ REQUIRED_REFERENCE_FILES = [
     "practical-learning/practical-exercises.md",
     "notebooks/notebook-patterns.md",
     "slides/slide-patterns.md",
+    "slides/html-deck.md",
     "assessment/assessment-patterns.md",
     "instructor/instructor-guidance.md",
     "adaptation/adaptation-rules.md",
@@ -41,6 +42,7 @@ REQUIRED_TEMPLATES = [
     "slide-template.md", "assessment-template.md",
     "instructor-guide-template.md", "course-review-template.md",
     "course-bag-submission-template.md", "course-bag-timetable-template.md",
+    "html-deck-shell.html",
 ]
 
 REQUIRED_CONFIG = [

@@ -23,7 +23,8 @@ specifies fonts, colors, or layout pixel positions — that's Stage 2.
 | Instructions | What to do for an upcoming activity/exercise |
 | Exercise | The exercise prompt itself, projected during practice time |
 | Recap | End-of-section or end-of-session summary |
-| Section divider | Opening each major agenda part: number, title, duration |
+| Section divider | Opening each major agenda part: number, title, and one sentence bridging from the previous part |
+| Try it | The learner applies the idea on the slide: runs code, toggles a before → after demo, or changes an input (HTML decks; a worked example in `.pptx`) |
 | Trainer Intro | Who is teaching — identity and credibility, right after the title slide |
 | Contact | How learners reach the instructor after the session |
 | Closing | The final "Thank You" slide |
@@ -132,29 +133,34 @@ the instructor asks for one.
 
 ## HTML deck format
 
+Full rules — the engine, its components, and how topics and examples are
+presented on it — are in `references/slides/html-deck.md`. The deck starts
+from `templates/html-deck-shell.html`. In short:
+
 - **One file.** All CSS and JavaScript are inline: no `<script src>`, no
   `<link rel="stylesheet">`, no build step. The deck opens by double-click
   in any browser and works offline.
-- **One `<section class="slide">` per spec slide**, in spec order, so the
-  section count equals the number of `## Slide N` entries in
+- **One `<section class="slide" data-title="…">` per spec slide**, in spec
+  order, so the section count equals the number of `## Slide N` entries in
   `slides/session-NN-slides.md`.
-- **16:9 stage.** Each slide is a fixed 1280×720 box scaled to fit the
-  window; content never scrolls or overflows the box. Split a slide in the
-  spec rather than shrinking text below a readable size.
-- **Navigation.** Next/previous with →/←, Space, PageDown/PageUp and
-  click or tap; Home/End jump to the first/last slide; `F` toggles
-  fullscreen; a slide counter shows `n / total`; the current slide is kept
-  in the URL hash so a refresh stays on it.
+- **16:9 stage.** A fixed 1600×900 box scaled to fit the window; content
+  never scrolls or overflows. Split a slide in the spec rather than
+  shrinking text below a readable size.
+- **Progressive reveal.** A slide shows its content one step at a time
+  (`data-steps` on the slide, `class="st" data-st="n"` on each element).
+- **Chrome.** Header with the current part and a slide counter, an overview
+  of all slides, a step bar, keyboard/click/swipe navigation, speaker notes
+  on `N`, fullscreen on `F`, the slide number in the URL hash.
 - **Real elements.** Text is live HTML text, tables are `<table>`, code is
-  `<pre><code>`, diagrams are inline SVG or HTML/CSS. Never a screenshot
-  standing in for a whole slide.
-- **Speaker notes.** Each slide carries the spec's Speaker Notes in
-  `<aside class="notes">`, hidden by default and toggled with `N`.
+  an editable code cell, diagrams are inline SVG or HTML/CSS. Never a
+  screenshot standing in for a whole slide.
+- **Interactive where it teaches.** Code cells that run, before → after
+  demos, inputs the learner can change.
 - **Visual design** comes from `config/presentation-style.md`, declared
-  once as CSS custom properties. Use a font stack that ends in common system
-  fonts, so the deck still renders if a named font is not installed.
-- **Print.** An `@media print` stylesheet puts one slide per landscape
-  page with notes hidden, so Print → Save as PDF gives a handout.
+  once as CSS custom properties, with a font stack that ends in common
+  system fonts.
+- **Print.** One fully revealed slide per landscape page, so Print → Save
+  as PDF gives a handout.
 - **Right-to-left decks:** `references/localization/arabic-rtl.md` §5.
 
 ## Stage 2 handoff contract
